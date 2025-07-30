@@ -5,6 +5,11 @@ return [
         'route' => 'admin-dashboard',
         'can' => 'admin-dashboard',
     ],
+    'Saksi Admin Dashboard' => [
+        'icon' => 'akar-dashboard',
+        'route' => 'saksi-admin-dashboard',
+        'can' => 'saksi-admin-dashboard',
+    ],
     'Saksi Admin' => [
         'icon' => 'akar-person',
         'route' => 'saksi-admin',
@@ -29,5 +34,10 @@ return [
         'icon' => 'akar-file',
         'route' => 'formulir-c1',
         'can' => 'formulir-c1',
+    ],
+    'Validasi Formulir C1' => [
+        'icon' => 'akar-check',
+        'route' => 'formulir-c1-validasi',
+        'can' => 'formulir-c1-validasi',
     ],
 ];

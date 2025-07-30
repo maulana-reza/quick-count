@@ -61,7 +61,7 @@
             <x-mobile-bottom-nav/>
             <!-- Page Heading -->
             <header>
-                <div class="px-4 py-6 mx-auto max-w-7xl w-full sm:px-6 lg:px-8">
+                <div class="px-4 py-6 mx-auto max-w-8xl w-full sm:px-6 lg:px-8">
                     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <h2 class="text-xl font-semibold leading-tight">
                             {{ @$header ?? \App\Helpers\Menu::getMenuLabel(request()->route()->getName()) }}
@@ -72,7 +72,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1 p-4 mx-auto max-w-7xl w-full sm:p-6 lg:p-8">
+            <main class="flex-1 p-4 mx-auto max-w-8xl w-full sm:p-6 lg:p-8">
                 {{ $slot }}
             </main>
 

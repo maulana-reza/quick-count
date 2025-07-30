@@ -8,6 +8,7 @@ class Log extends Component
 {
     public ?string $type = null;
     public ?string $user_id = null;
+    public ?string $q = null;
     public function mount()
     {
 
@@ -19,6 +20,15 @@ class Log extends Component
             ->with(['user'])
             ->when($this->type, function ($query) {
                 $query->where('aksi', $this->type);
+            })
+            ->when($this->q, function ($query) {
+                $query->where(function ($q) {
+                    $q->where('aksi', 'like', '%' . $this->q . '%')
+                        ->orWhereHas('user', function ($q) {
+                            $q->where('name', 'like', '%' . $this->q . '%')
+                                ->orWhere('no_hp', 'like', '%' . $this->q . '%');
+                        });
+                });
             })
             ->when($this->user_id, function ($query) {
                 $query->where('user_id', $this->user_id);

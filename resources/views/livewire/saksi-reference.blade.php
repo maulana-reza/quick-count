@@ -31,7 +31,7 @@
             </thead>
             <tbody class="divide-y divide-">
             @forelse($results as $result)
-                <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-1' }}">
+                <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-0' }}">
                     <td class="px-3 py-2">{{ $result->nik }}</td>
                     <td class="px-3 py-2">{{ $result->nama }}</td>
                     <td class="px-3 py-2">{{ $result->tps }}</td>

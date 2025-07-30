@@ -40,10 +40,19 @@ class Dasbor extends Component
                     ->count(),
             ],
         ];
+        $this->getActiveUsers();
     }
+
+    public ?string $q = '';
+
     public function getActiveUsers()
     {
-         $allUsers = User::all();
+        $allUsers = User::when($this->q, function ($query) {
+            $query->where('name', 'like', '%' . $this->q . '%')
+                ->orWhere('no_hp', 'like', '%' . $this->q . '%')
+                ->orWhere('email', 'like', '%' . $this->q . '%')
+                ->get();
+        })->get();
 
         // Filter hanya yang online (ada di cache)
         $this->activeUsers = $allUsers->filter(function ($user) {
@@ -53,14 +62,17 @@ class Dasbor extends Component
                 'id' => $user->id,
                 'name' => $user->name,
                 'no_hp' => $user->no_hp,
-                ''
+                'last_seen_at' => $user->last_seen_at,
+                'is_online' => Cache::has('user-is-online-' . $user->id),
+                'last_login_at' => $user->last_login_at,
+                'role' => $user->getRoleNames()->first() ?: 'Tidak ada peran',
             ];
         })->toArray();
-
     }
+
     public function test()
     {
-        $this->dispatch('show','Berhasil menghapus data absensi')->to('livewire-toast');
+        $this->dispatch('show', 'Berhasil menghapus data absensi')->to('livewire-toast');
     }
 
     public function render()

@@ -16,8 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+            'last_user_activity' => \App\Http\Middleware\LastUserActivity::class,
         ]);
         //
+        $middleware->use([\App\Http\Middleware\LastUserActivity::class]);
+        return $middleware;
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class LogLastLogin
 {
@@ -20,6 +21,11 @@ class LogLastLogin
      */
     public function handle(object $event): void
     {
-        $event->user->update(['last_login_at' => now()]);
+        $user = $event->user;
+        $user->last_login_at = now();
+        $user->save();
+
+        // Tandai user sedang online
+        Cache::put('user-is-online-' . $user->id, true, now()->addMinutes(5));
     }
 }

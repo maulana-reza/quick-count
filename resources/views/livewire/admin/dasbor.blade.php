@@ -13,54 +13,61 @@
                     <div class="text-sm text-gray-500">{{ $data['label'] }}</div>
                     <div class="text-2xl font-semibold">{!! $data['value'] !!}</div>
                 </div>
-                {{--                    <x-button wire:click="download('{{ $data['label'] }}')">--}}
-                {{--                        @svg('heroicon-o-arrow-down-on-square', 'h-5 w-5')--}}
-                {{--                    </x-button>--}}
             </div>
         @endforeach
     </div>
-    <div class="grid gap-4 md:grid-cols-5 ">
-        <div class="md:col-span-3">
+    <div class="grid grid-cols-2 gap-4 custom-scrollbar dark:bg-dark-eval-1">
+        <div>
             @livewire('admin-saksi.log')
         </div>
-        <div wire:init="getActiveUsers" class="md:col-span-2 rounded dark:bg-dark-eval-1 overflow-hidden" wire:polling.3s="getActiveUsers">
-            <x-label>
-                Pengguna Aktif
-            </x-label>
-            <table class="w-full my-4 whitespace-nowrap rounded shadow overflow-hidden"
-                   wire:loading.class.delay="opacity-50">
-                <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
-                <tr class="">
-                    <th class="px-3 py-2">
-                        Nama
-                    </th>
-                    <th class="px-3 py-2">
-                        No Hp
-                    </th>
-                    <th class="px-3 py-2">
-                        Terakhir Login
-                    </th>
-                    <th class="px-3 py-2">
-                        Terakhir Dilihat
-                    </th>
-                </tr>
-                </thead>
-                <tbody class="divide-y divide-">
-                @forelse($activeUsers as $user)
-                    <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-1' }}">
-                        <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user['name'] }}</td>
-                        <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user['no_hp'] }}</td>
-                        <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user['last_login_at'] }}</td>
-                        <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user['last_seen_at'] }}</td>
+        <div class="custom-scrollbar dark:bg-dark-eval-1">
+            <div
+                wire:init="getActiveUsers"
+                wire:poll.3s="getActiveUsers"
+                class="grid grid-cols-1 gap-4"
+            >
+                <div>
+                    <x-label class="text-2xl font-semibold m-0">
+                        Pengguna Aktif
+                    </x-label>
+                </div>
+                <div class="flex justify-between ">
+                    <div class="flex">
+                        <x-tall-crud-input-search/>
+                    </div>
+                </div>
+
+                <table
+                    class="w-full whitespace-nowrap rounded overflow-hidden table table-bordered dark:border-turquoise-500"
+                    wire:loading.class.delay="opacity-50"
+                >
+                    <thead class="text-left bg-turquoise-500 text-white font-bold dark:text-white">
+                    <tr>
+                        <th class="px-3 py-2">Nama</th>
+                        <th class="px-3 py-2">No Hp</th>
+                        <th class="px-3 py-2">Terakhir Login</th>
+                        <th class="px-3 py-2">Terakhir Dilihat</th>
                     </tr>
-                @empty
-                    <tr class="bg-white">
-                        <td class="text-center py-4 text-gray-500" colspan="4">
-                            Tidak ada pengguna aktif.
-                        </td>
-                    </tr>
-                @endforelse
-            </table>
+                    </thead>
+
+                    <tbody>
+                    @forelse($activeUsers as $user)
+                        <tr class="{{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-1' }}">
+                            <td class="px-3 py-2 text-sm whitespace-pre-wrap"> <span class="text-green-500 text-xs">🟢</span> {{ $user['name'] ?? '-' }} ({{$user['role']}})</td>
+                            <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user['no_hp'] ?? '-' }}</td>
+                            <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user['last_login_at'] ?? '-' }}</td>
+                            <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user['last_seen_at'] ?? '-' }}</td>
+                        </tr>
+                    @empty
+                        <tr class="bg-white">
+                            <td colspan="4" class="text-center py-4 text-gray-500">
+                                Tidak ada pengguna aktif.
+                            </td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
