@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Constants\Form;
 use App\Models\DataFormulir;
 use App\Models\FormUkt;
+use App\Models\Log;
 use App\Models\Paslon;
 use App\Models\Periode;
 use Illuminate\Console\Command;
@@ -42,6 +43,10 @@ class KumpulkanFormulir extends Command
         $filePath = storage_path('app/public/chart.json');
         file_put_contents($filePath, $data);
         $this->line('Updating Periode...');
+        \Illuminate\Support\Facades\Log::log(
+            'info',
+            'Kumpulkan Formulir updated_at :' . now()->toIso8601String(),
+        );
 
     }
     public function getDataCategories() : array
