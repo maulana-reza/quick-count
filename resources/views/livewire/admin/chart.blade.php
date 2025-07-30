@@ -23,7 +23,7 @@
 
         async function fetchChartData() {
             try {
-                const response = await fetch('assets/test.json', { cache: 'no-store' });
+            const response = await fetch('{{ asset('storage/chart.json') }}', { cache: 'no-store' });
                 const data = await response.json();
                 const updateTime = new Date(data.update_at).toLocaleString('id-ID', {
                     dateStyle: 'medium',
