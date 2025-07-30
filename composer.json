@@ -11,18 +11,30 @@
         {
             "type": "vcs",
             "url": "https://github.com/laravel-shift/lumki.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/indonesia.git"
         }
     ],
     "require": {
         "php": "^8.2",
-        "blade-ui-kit/blade-heroicons": "^1.2",
-        "blade-ui-kit/blade-icons": "^1.6",
+        "blade-ui-kit/blade-heroicons": "^2.4",
+        "codeat3/blade-akar-icons": "^2.0",
+        "codeat3/blade-fontisto-icons": "^1.4",
+        "codeat3/blade-google-material-design-icons": "^1.19",
+        "codeat3/blade-maki-icons": "^1.8",
+        "codeat3/blade-phosphor-icons": "^2.2",
+        "intervention/image": "^3.11",
         "kineticamobile/lumki": "dev-l11-compatibility",
+        "laravel-lang/common": "^6.4",
         "laravel/framework": "^11.9",
         "laravel/jetstream": "^5.1",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "laravolt/indonesia": "dev-l11-compatibility",
         "livewire/livewire": "^3.0",
+        "maatwebsite/excel": "3.1.64",
         "waziri123/waziri-tall-crud-generator": "dev-master"
     },
     "require-dev": {

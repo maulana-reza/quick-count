@@ -17,11 +17,21 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
-use HasRoles;
-use Impersonate;
+    use HasRoles;
+    use Impersonate;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    const ADMIN = 'admin';
+    const ADMIN_SAKSI = 'saksi_admin';
+    const SAKSI = 'saksi';
+    const KOORDINATOR_SAKSI = 'koordinator_saksi';
+    const ROLES = [
+        self::ADMIN => 'Admin',
+        self::ADMIN_SAKSI => 'Admin Saksi',
+        self::SAKSI => 'Saksi',
+        self::KOORDINATOR_SAKSI => 'Koordinator Saksi',
+    ];
     /**
      * The attributes that are mass assignable.
      *
@@ -31,6 +41,8 @@ use Impersonate;
         'name',
         'email',
         'password',
+        'last_login_at',
+        'last_seen_at',
     ];
 
     /**
