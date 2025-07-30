@@ -98,8 +98,6 @@ class DatabaseSeeder extends Seeder
                 'email' => $admin['email'],
                 'name' => $admin['name'],
                 'password' => $admin['password'],
-                'last_login_at' => now(),
-                'last_seen_at' => now(),
             ]
         );
         $adminUser->syncRoles(['admin']);
@@ -111,8 +109,6 @@ class DatabaseSeeder extends Seeder
                 'email' => $saksi['email'],
                 'name' => $saksi['name'],
                 'password' => $saksi['password'],
-                'last_login_at' => now(),
-                'last_seen_at' => now(),
             ]
         );
         $saksiUser->syncRoles(['saksi']);
@@ -124,8 +120,6 @@ class DatabaseSeeder extends Seeder
                 'email' => $saksi_admin['email'],
                 'name' => $saksi_admin['name'],
                 'password' => $saksi_admin['password'],
-                'last_login_at' => now(),
-                'last_seen_at' => now(),
             ]
         );
         $saksiAdminUser->syncRoles(['saksi_admin']);
@@ -137,8 +131,6 @@ class DatabaseSeeder extends Seeder
                 'email' => $koordinator_saksi['email'],
                 'name' => $koordinator_saksi['name'],
                 'password' => $koordinator_saksi['password'],
-                'last_login_at' => now(),
-                'last_seen_at' => now(),
             ]
         );
         $koordinatorSaksiUser->syncRoles(['koordinator_saksi']);

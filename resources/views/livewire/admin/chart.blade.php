@@ -2,7 +2,7 @@
     <div class="bg-white shadow rounded dark:bg-dark-eval-1 rounded-md overflow-hidden md:col-span-1">
         <div class="ml-2 flex-grow p-3">
             <div class="text-sm text-gray-500">
-                Statistik Jumlah Mahasiswa Per Periode
+                Statistik Jumlah Pemilih Pemilu
             </div>
             <div>
                 <span class="text-xs text-gray-500">Terakhir diperbarui: </span>
@@ -18,27 +18,27 @@
 @section('plugins.Chartjs', true)
 
 @section('js')
-    <script type="module">
+    <script type="module" defer>
         let chart;
-
         async function fetchChartData() {
             try {
             const response = await fetch('{{ asset('storage/chart.json') }}', { cache: 'no-store' });
                 const data = await response.json();
-                const updateTime = new Date(data.update_at).toLocaleString('id-ID', {
+                const updateTime = new Date(data.updated_at).toLocaleString('id-ID', {
                     dateStyle: 'medium',
                     timeStyle: 'short',
                 });
                 document.getElementById('update-time-value').textContent = updateTime;
-
                 if (!chart) {
                     chart = Highcharts.chart('chart-container', {
                         chart: { type: 'column' },
                         title: { text: '', align: 'left' },
-                        xAxis: { categories: data.categories },
+                        xAxis: {
+                            title: { text: 'Distrik/Kecamatan' },
+                            categories: data.categories },
                         yAxis: {
                             min: 0,
-                            title: { text: 'Jumlah Mahasiswa' },
+                            title: { text: 'Jumlah Pemilih' },
                             stackLabels: {
                                 enabled: true,
                                 formatter: function () {
@@ -92,10 +92,8 @@
                 console.error("Gagal mengambil data chart:", err);
             }
         }
-
         // Ambil pertama kali
         fetchChartData();
-
         // Ambil ulang tiap 10 detik
         setInterval(fetchChartData, 10000);
     </script>

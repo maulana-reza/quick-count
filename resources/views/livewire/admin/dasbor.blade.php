@@ -25,8 +25,7 @@
         </div>
         <div class="custom-scrollbar dark:bg-dark-eval-1">
             <div
-                wire:init
-                wire:poll.3s
+{{--                wire:poll.3s--}}
                 class="grid grid-cols-1 gap-4"
             >
                 <div>
