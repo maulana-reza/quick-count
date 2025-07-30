@@ -18,6 +18,9 @@ class Tps extends Component
                         $q->where('name', 'like', '%' . $this->q . '%');
                     });
             })
+            ->whereHas('city.province', function ($query) {
+                $query->where('name', 'papua');
+            })
             ->with(['city'])
             ->orderBy('name')
             ->paginate(10);

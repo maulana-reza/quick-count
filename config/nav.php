@@ -40,4 +40,9 @@ return [
         'route' => 'formulir-c1-validasi',
         'can' => 'formulir-c1-validasi',
     ],
+    'Call Center' => [
+        'icon' => 'akar-check',
+        'route' => 'formulir-c1-validasi',
+        'can' => 'formulir-c1-validasi',
+    ],
 ];
