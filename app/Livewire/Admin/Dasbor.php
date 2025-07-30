@@ -2,12 +2,16 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Formulir;
+use App\Models\Tps;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class Dasbor extends Component
 {
     public ?array $datas;
+    public ?array $activeUsers = [];
 
     public function mount()
     {
@@ -15,8 +19,7 @@ class Dasbor extends Component
             [
                 'icon' => 'akar-calendar',
                 'label' => 'Progress Saksi TPS',
-                'value' =>0,
-//                'value' => TPS::count(),
+                'value' => Formulir::count(),
             ],
             [
                 'icon' => 'heroicon-o-user',
@@ -30,7 +33,30 @@ class Dasbor extends Component
                 'value' => User::role(User::ADMIN_SAKSI)
                     ->count(),
             ],
+            [
+                'icon' => 'heroicon-o-user',
+                'label' => 'Jumlah Koordinator Saksi',
+                'value' => User::role(User::KOORDINATOR_SAKSI)
+                    ->count(),
+            ],
         ];
+    }
+    public function getActiveUsers()
+    {
+         $allUsers = User::all();
+
+        // Filter hanya yang online (ada di cache)
+        $this->activeUsers = $allUsers->filter(function ($user) {
+            return Cache::has('user-is-online-' . $user->id);
+        })->map(function ($user) {
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'no_hp' => $user->no_hp,
+                ''
+            ];
+        })->toArray();
+
     }
     public function test()
     {

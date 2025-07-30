@@ -82,7 +82,11 @@
     </div>
     @livewire('livewire-toast')
 </div>
+
+
 @stack('modals')
+@stack('js')
+@yield('js')
 </body>
 @livewireScripts
 

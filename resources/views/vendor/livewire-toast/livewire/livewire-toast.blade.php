@@ -19,11 +19,11 @@
     @endif
 >
     @if($message)
-        <div class="flex bg-white-500  border-l-7 border-{{$bgColorCss}}-500 py-3 px-4 shadow-md mb-2 ">
+        <div class="flex bg-white  border-l-4 border-{{$bgColorCss}}-500 py-3 px-4 shadow-md mb-2 ">
             <!-- icons -->
             @if($showIcon)
                 <div>
-                    <div class="text-{{$bgColorCss}}-500 rounded-full bg-{{$textColorCss}} mr-3">
+                    <div class="text-{{$bgColorCss}}-500 rounded-full border border-{{$bgColorCss}}-500 bg-white mr-3">
                         @include('livewire-toast::icons.' . $type)
                     </div>
                 </div>

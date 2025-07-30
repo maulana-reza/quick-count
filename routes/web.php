@@ -11,7 +11,6 @@ Route::get('/', function () {
         return redirect()->route('login');
     }
 });
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -20,5 +19,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', \App\Livewire\Admin\Dasbor::class)->name('admin-dashboard');
     Route::get('/saksi', \App\Livewire\SaksiReference::class)->name('saksi');
-
+    Route::get('/saksi-admin', \App\Livewire\UserReference::class)->name('saksi-admin');
+    Route::get('/saksi-koordinator', \App\Livewire\UserReference::class)->name('saksi-koordinator');
+    Route::get('/paslon', \App\Livewire\PaslonReference::class)->name('paslon');
+    Route::get('/formulir-c1', \App\Livewire\FormulirReference::class)->name('formulir-c1');
 });

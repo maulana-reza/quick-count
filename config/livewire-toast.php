@@ -16,14 +16,14 @@ return [
     //Background Color used by TailwindCss for various types.
     'color' => [
         'bg' => [
-            'success' => 'turquoise-500',
+            'success' => 'turquoise',
             'warning' => 'yellow',
             'info' => 'blue',
             'error' => 'red',
         ]
     ],
     //Text Color used by TailwindCss class. If using color other than white or black, provide full color like red-300.
-    'text_color' => 'white', //default is white
+    'text_color' => 'turquoise-500', //default is white
     //Whether to use Transition
     'transition' => true,  //default is true
     //Following transitions are supported:

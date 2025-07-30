@@ -17,6 +17,7 @@ class Formulir extends Model
         'laporan_kejadian',
         'foto_kejadian',
         'status_kejadian',
+        'tps_id',
     ];
 
     public function saksi()
@@ -27,5 +28,9 @@ class Formulir extends Model
     public function village()
     {
         return $this->belongsTo(Village::class);
+    }
+    public function tps()
+    {
+        return $this->belongsTo(Tps::class);
     }
 }
