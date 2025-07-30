@@ -9,6 +9,7 @@ class Log extends Component
     public ?string $type = null;
     public ?string $user_id = null;
     public ?string $q = null;
+    public $datas;
     public function mount()
     {
 

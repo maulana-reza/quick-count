@@ -14,6 +14,7 @@ class Tps extends Model
         'village_id',
     ];
 
+
     public function village()
     {
         return $this->belongsTo(Village::class);

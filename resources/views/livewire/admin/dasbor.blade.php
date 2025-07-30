@@ -25,7 +25,7 @@
         </div>
         <div class="custom-scrollbar dark:bg-dark-eval-1">
             <div
-{{--                wire:poll.3s--}}
+                wire:poll.5s
                 class="grid grid-cols-1 gap-4"
             >
                 <div>
@@ -72,5 +72,8 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div>
+        @livewire('admin.tps')
     </div>
 </div>

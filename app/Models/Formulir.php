@@ -18,6 +18,7 @@ class Formulir extends Model
         'foto_kejadian',
         'status_kejadian',
         'tps_id',
+        'suara_tidak_sah',
     ];
 
     public function saksi()
@@ -32,5 +33,27 @@ class Formulir extends Model
     public function tps()
     {
         return $this->belongsTo(Tps::class);
+    }
+    public function data_formulir()
+    {
+        return $this->hasMany(Formulir::class, 'tps_id', 'id');
+    }
+
+    public static function countByDistrict($district_code)
+    {
+        $formulirs = self::whereHas('village', function ($query) use ($district_code) {
+            $query->where('district_code', $district_code);
+        })->get();
+
+        $suara_sah = $formulirs->flatMap(function ($formulir) {
+            return $formulir->data_formulir;
+        })->sum('value');
+
+        $suara_tidak_sah = $formulirs->sum('suara_tidak_sah');
+
+        return [
+            'suara_sah' => $suara_sah,
+            'suara_tidak_sah' => $suara_tidak_sah,
+        ];
     }
 }
