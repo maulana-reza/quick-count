@@ -19,13 +19,6 @@ return new class extends Migration {
         Schema::dropIfExists('saksi');
         Schema::dropIfExists('paslon');
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('no_hp');
-            $table->string('no_hp')->nullable()->after('email');
-        });
-        Schema::table('users', function (Blueprint $table) {
-            if (Schema::hasColumn('users', 'no_hp')) {
-                $table->dropColumn('no_hp');
-            }
             $table->string('no_hp')->nullable()->after('email');
         });
         Schema::create('paslon', function (Blueprint $table) {
