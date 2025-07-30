@@ -48,20 +48,37 @@ class Menu
     {
         session()->put('tab_umum', $umum);
     }
+
     public static function getTabUmum()
     {
         return session()->get('tab_umum');
     }
+
     public static function setTabSubUmum($subUmum)
     {
         session()->put('tab_sub_umum', $subUmum);
     }
+
     public static function getTabSubUmum()
     {
         return session()->get('tab_sub_umum');
     }
+
     public static function setStatusFormulir($key)
     {
 
+    }
+
+    public static function chatWhatsapp(?string $noHp = null , ?string $message = ''): string
+    {
+        if (empty($noHp)) {
+            return '-';
+        }
+        $noHp = preg_replace('/[^\d]/', '', $noHp);
+        $noHp = str_starts_with($noHp, '0') ? '62' . substr($noHp, 1) :
+            (str_starts_with($noHp, '62') ? $noHp : '62' . $noHp);
+        return "<a href='https://wa.me/{$noHp}?text=" . urlencode($message) . "' target='_blank' class='btn btn-success btn-sm'>
+            <i class='fab fa-whatsapp'></i> '.$noHp.'
+        </a>";
     }
 }

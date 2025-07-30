@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Livewire;
-
 use Livewire\Attributes\On;
 use Livewire\Component;
 use \Illuminate\View\View;
-use App\Models\User;
+use App\Models\Tps;
+use Laravolt\Indonesia\Models\Village;
 
-class UserReferenceChild extends Component
+class TpsReferenceChild extends Component
 {
 
-    public $item = [];
+    public $item=[];
 
     /**
      * @var array
@@ -24,21 +24,24 @@ class UserReferenceChild extends Component
     /**
      * @var array
      */
+    public $villages = [];
+
+    /**
+     * @var array
+     */
     protected $rules = [
-        'item.name' => '',
-        'item.email' => '',
-        'item.no_hp' => '',
-        'item.password' => '',
+        'item.alamat' => '',
+        'item.no_tps' => '',
+        'item.village_id' => 'required',
     ];
 
     /**
      * @var array
      */
     protected $validationAttributes = [
-        'item.name' => 'Name',
-        'item.email' => 'Email',
-        'item.no_hp' => 'No Hp',
-        'item.password' => 'Password',
+        'item.alamat' => 'Alamat',
+        'item.no_tps' => 'No Tps',
+        'item.village_id' => 'Village',
     ];
 
     /**
@@ -56,7 +59,7 @@ class UserReferenceChild extends Component
      */
     public $confirmingItemCreation = false;
 
-    public $user;
+    public $tps ;
 
     /**
      * @var bool
@@ -65,23 +68,22 @@ class UserReferenceChild extends Component
 
     public function render(): View
     {
-        return view('livewire.user-reference-child');
+        return view('livewire.tps-reference-child');
     }
-
     #[On('showDeleteForm')]
-    public function showDeleteForm(User $user): void
+    public function showDeleteForm(Tps $tps): void
     {
         $this->confirmingItemDeletion = true;
-        $this->user = $user;
+        $this->tps = $tps;
     }
 
     public function deleteItem(): void
     {
-        $this->user->delete();
+        $this->tps->delete();
         $this->confirmingItemDeletion = false;
-        $this->user = '';
+        $this->tps = '';
         $this->reset(['item']);
-        $this->dispatch('refresh')->to('user-reference');
+        $this->dispatch('refresh')->to('tps-reference');
         $this->dispatch('show', 'Record Deleted Successfully')->to('livewire-toast');
 
     }
@@ -92,46 +94,45 @@ class UserReferenceChild extends Component
         $this->confirmingItemCreation = true;
         $this->resetErrorBag();
         $this->reset(['item']);
+
+        $this->villages = Village::orderBy('name')->get();
     }
 
     public function createItem(): void
     {
         $this->validate();
-        $item = User::create([
-            'name' => $this->item['name'] ?? '',
-            'email' => $this->item['email'] ?? '',
-            'no_hp' => $this->item['no_hp'] ?? '',
-            'password' => bcrypt($this->item['password'] ?? ''),
+        $item = Tps::create([
+            'alamat' => $this->item['alamat'] ?? '',
+            'no_tps' => $this->item['no_tps'] ?? '',
+            'village_id' => $this->item['village_id'] ?? 0,
         ]);
         $this->confirmingItemCreation = false;
-        $this->dispatch('refresh')->to('user-reference');
+        $this->dispatch('refresh')->to('tps-reference');
         $this->dispatch('show', 'Record Added Successfully')->to('livewire-toast');
 
     }
 
     #[On('showEditForm')]
-    public function showEditForm(User $user): void
+    public function showEditForm(Tps $tps): void
     {
         $this->resetErrorBag();
-        $this->user = $user;
-        $this->item = $user->toArray();
+        $this->tps = $tps;
+        $this->item = $tps->toArray();
         $this->confirmingItemEdit = true;
+
+        $this->villages = Village::orderBy('name')->get();
     }
 
     public function editItem(): void
     {
         $this->validate();
-        $item = $this->user->update([
-            'name' => $this->item['name'] ?? '',
-            'email' => $this->item['email'] ?? '',
-            'no_hp' => $this->item['no_hp'] ?? '',
-        ]);
-        if (!empty($this->item['password'])) {
-            $this->user->update(['password' => bcrypt($this->item['password'])]);
-        }
+        $item = $this->tps->update([
+            'alamat' => $this->item['alamat'] ?? '',
+            'no_tps' => $this->item['no_tps'] ?? '',
+         ]);
         $this->confirmingItemEdit = false;
         $this->primaryKey = '';
-        $this->dispatch('refresh')->to('user-reference');
+        $this->dispatch('refresh')->to('tps-reference');
         $this->dispatch('show', 'Record Updated Successfully')->to('livewire-toast');
 
     }

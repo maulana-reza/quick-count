@@ -1,16 +1,15 @@
 <?php
 
 namespace App\Livewire;
-
 use Livewire\Attributes\On;
 use Livewire\Component;
 use \Illuminate\View\View;
-use App\Models\User;
+use App\Models\CallCenter;
 
-class UserReferenceChild extends Component
+class CallCenterReferenceChild extends Component
 {
 
-    public $item = [];
+    public $item=[];
 
     /**
      * @var array
@@ -25,20 +24,16 @@ class UserReferenceChild extends Component
      * @var array
      */
     protected $rules = [
-        'item.name' => '',
-        'item.email' => '',
+        'item.nama' => '',
         'item.no_hp' => '',
-        'item.password' => '',
     ];
 
     /**
      * @var array
      */
     protected $validationAttributes = [
-        'item.name' => 'Name',
-        'item.email' => 'Email',
+        'item.nama' => 'Nama',
         'item.no_hp' => 'No Hp',
-        'item.password' => 'Password',
     ];
 
     /**
@@ -56,7 +51,7 @@ class UserReferenceChild extends Component
      */
     public $confirmingItemCreation = false;
 
-    public $user;
+    public $callcenter ;
 
     /**
      * @var bool
@@ -65,23 +60,22 @@ class UserReferenceChild extends Component
 
     public function render(): View
     {
-        return view('livewire.user-reference-child');
+        return view('livewire.call-center-reference-child');
     }
-
     #[On('showDeleteForm')]
-    public function showDeleteForm(User $user): void
+    public function showDeleteForm(CallCenter $callcenter): void
     {
         $this->confirmingItemDeletion = true;
-        $this->user = $user;
+        $this->callcenter = $callcenter;
     }
 
     public function deleteItem(): void
     {
-        $this->user->delete();
+        $this->callcenter->delete();
         $this->confirmingItemDeletion = false;
-        $this->user = '';
+        $this->callcenter = '';
         $this->reset(['item']);
-        $this->dispatch('refresh')->to('user-reference');
+        $this->dispatch('refresh')->to('call-center-reference');
         $this->dispatch('show', 'Record Deleted Successfully')->to('livewire-toast');
 
     }
@@ -97,41 +91,35 @@ class UserReferenceChild extends Component
     public function createItem(): void
     {
         $this->validate();
-        $item = User::create([
-            'name' => $this->item['name'] ?? '',
-            'email' => $this->item['email'] ?? '',
+        $item = CallCenter::create([
+            'nama' => $this->item['nama'] ?? '',
             'no_hp' => $this->item['no_hp'] ?? '',
-            'password' => bcrypt($this->item['password'] ?? ''),
         ]);
         $this->confirmingItemCreation = false;
-        $this->dispatch('refresh')->to('user-reference');
+        $this->dispatch('refresh')->to('call-center-reference');
         $this->dispatch('show', 'Record Added Successfully')->to('livewire-toast');
 
     }
 
     #[On('showEditForm')]
-    public function showEditForm(User $user): void
+    public function showEditForm(CallCenter $callcenter): void
     {
         $this->resetErrorBag();
-        $this->user = $user;
-        $this->item = $user->toArray();
+        $this->callcenter = $callcenter;
+        $this->item = $callcenter->toArray();
         $this->confirmingItemEdit = true;
     }
 
     public function editItem(): void
     {
         $this->validate();
-        $item = $this->user->update([
-            'name' => $this->item['name'] ?? '',
-            'email' => $this->item['email'] ?? '',
+        $item = $this->callcenter->update([
+            'nama' => $this->item['nama'] ?? '',
             'no_hp' => $this->item['no_hp'] ?? '',
-        ]);
-        if (!empty($this->item['password'])) {
-            $this->user->update(['password' => bcrypt($this->item['password'])]);
-        }
+         ]);
         $this->confirmingItemEdit = false;
         $this->primaryKey = '';
-        $this->dispatch('refresh')->to('user-reference');
+        $this->dispatch('refresh')->to('call-center-reference');
         $this->dispatch('show', 'Record Updated Successfully')->to('livewire-toast');
 
     }

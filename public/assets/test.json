@@ -1,0 +1,14 @@
+{
+    "categories": ["Paslon 1", "Paslon 2", "Paslon 3"],
+    "series": [
+        {
+            "name": "Wilayah A",
+            "data": [120, 80, 60]
+        },
+        {
+            "name": "Wilayah B",
+            "data": [90, 110, 70]
+        }
+    ],
+    "update_at": "2023-10-01T12:00:00Z"
+}

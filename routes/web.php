@@ -48,6 +48,15 @@ Route::middleware([
     Route::get('/formulir-c1-validasi', \App\Livewire\FormulirReference::class)
         ->can('formulir-c1-validasi')
         ->name('formulir-c1-validasi');
+    Route::get('/statistik', \App\Livewire\Admin\Chart::class)
+        ->can('statistik')
+        ->name('statistik');
+    Route::get('/call-center', \App\Livewire\CallCenterReference::class)
+        ->can('call-center')
+        ->name('call-center');
+    Route::get('tps',\App\Livewire\TpsReference::class)
+        ->can('tps')
+        ->name('tps');
 });
 
 Route::prefix('saksi-admin')->middleware([
@@ -57,5 +66,7 @@ Route::prefix('saksi-admin')->middleware([
     'last_user_activity',
     'role:' . \App\Models\User::ADMIN_SAKSI,
 ])->group(function () {
-    Route::get('/dasbor', \App\Livewire\AdminSaksi\Dasbor::class)->name('saksi-admin-dashboard');
+    Route::get('/dasbor', \App\Livewire\AdminSaksi\Dasbor::class)
+        ->can('saksi-admin-dashboard')
+        ->name('saksi-admin-dashboard');
 });

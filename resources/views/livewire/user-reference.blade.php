@@ -34,7 +34,7 @@
                     <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-1' }}">
                         <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $result->name }}</td>
                         <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $result->email }}</td>
-                        <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $result->no_hp }}</td>
+                        <td class="px-3 py-2 text-sm whitespace-pre-wrap">{!! \App\Helpers\Menu::chatWhatsapp($result->no_hp) !!}</td>
                         <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $result->last_login_at }}</td>
                         <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $result->last_seen_at }}</td>
                         <td class="px-3 py-2 text-sm whitespace-pre-wrap flex gap-2">

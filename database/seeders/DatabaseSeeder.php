@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
             'saksi-koordinator',
             'paslon',
             'formulir-c1-validasi',
+            'call-center',
         ];
         foreach ($permissions as $permission) {
             Permission::updateOrCreate(['name' => $permission]);
@@ -60,6 +61,7 @@ class DatabaseSeeder extends Seeder
                 'saksi-admin',
                 'saksi-koordinator',
                 'paslon',
+                'call-center',
             ],
             'saksi' => [
                 'saksi-dashboard',

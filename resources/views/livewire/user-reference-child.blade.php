@@ -30,7 +30,7 @@
                     <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror
                 </div>
                 <div>
-                    <x-tall-crud-label>Email</x-tall-crud-label>
+                    <x-tall-crud-label>Username</x-tall-crud-label>
                     <x-tall-crud-input class="block mt-1 w-full" type="text" wire:model="item.email"/>
                     @error('item.email')
                     <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror
@@ -47,17 +47,17 @@
                     @error('item.password')
                     <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror
                 </div>
-                <div>
-                    <x-tall-crud-label>Role</x-tall-crud-label>
-                    <x-tall-crud-select class="block mt-1 w-full" wire:model="item.role">
-                        <option value="">Select Role</option>
-                        @foreach(\App\Models\User::ROLES as $role)
-                            <option value="{{ $role }}">{{ $role }}</option>
-                        @endforeach
-                    </x-tall-crud-select>
-                    @error('item.role')
-                    <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror
-                </div>
+                {{--                <div>--}}
+                {{--                    <x-tall-crud-label>Role</x-tall-crud-label>--}}
+                {{--                    <x-tall-crud-select class="block mt-1 w-full" wire:model="item.role">--}}
+                {{--                        <option value="">Select Role</option>--}}
+                {{--                        @foreach(\App\Models\User::ROLES as $role)--}}
+                {{--                            <option value="{{ $role }}">{{ $role }}</option>--}}
+                {{--                        @endforeach--}}
+                {{--                    </x-tall-crud-select>--}}
+                {{--                    @error('item.role')--}}
+                {{--                    <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror--}}
+                {{--                </div>--}}
             </div>
         </x-slot>
 
@@ -74,7 +74,7 @@
         </x-slot>
 
         <x-slot name="content">
-            <div class="grid grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
                 <div>
                     <x-tall-crud-label>Name</x-tall-crud-label>
                     <x-tall-crud-input class="block mt-1 w-full" type="text" wire:model="item.name"/>
@@ -82,13 +82,11 @@
                     <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror
                 </div>
                 <div>
-                    <x-tall-crud-label>Email</x-tall-crud-label>
+                    <x-tall-crud-label>Username</x-tall-crud-label>
                     <x-tall-crud-input class="block mt-1 w-full" type="text" wire:model="item.email"/>
                     @error('item.email')
                     <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror
                 </div>
-            </div>
-            <div class="grid grid-cols-2 gap-8">
                 <div>
                     <x-tall-crud-label>No Hp</x-tall-crud-label>
                     <x-tall-crud-input class="block mt-1 w-full" type="text" wire:model="item.no_hp"/>
@@ -101,6 +99,17 @@
                     @error('item.password')
                     <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror
                 </div>
+                {{--                <div>--}}
+                {{--                    <x-tall-crud-label>Role</x-tall-crud-label>--}}
+                {{--                    <x-tall-crud-select class="block mt-1 w-full" wire:model="item.role">--}}
+                {{--                        <option value="">Select Role</option>--}}
+                {{--                        @foreach(\App\Models\User::ROLES as $role)--}}
+                {{--                            <option value="{{ $role }}">{{ $role }}</option>--}}
+                {{--                        @endforeach--}}
+                {{--                    </x-tall-crud-select>--}}
+                {{--                    @error('item.role')--}}
+                {{--                    <x-tall-crud-error-message>{{$message}}</x-tall-crud-error-message> @enderror--}}
+                {{--                </div>--}}
             </div>
         </x-slot>
 

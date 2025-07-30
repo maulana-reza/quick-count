@@ -7,9 +7,11 @@ use App\Models\Tps;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Dasbor extends Component
 {
+    use WithPagination;
     public ?array $datas;
     public ?array $activeUsers = [];
 
@@ -40,35 +42,9 @@ class Dasbor extends Component
                     ->count(),
             ],
         ];
-        $this->getActiveUsers();
     }
 
     public ?string $q = '';
-
-    public function getActiveUsers()
-    {
-        $allUsers = User::when($this->q, function ($query) {
-            $query->where('name', 'like', '%' . $this->q . '%')
-                ->orWhere('no_hp', 'like', '%' . $this->q . '%')
-                ->orWhere('email', 'like', '%' . $this->q . '%')
-                ->get();
-        })->get();
-
-        // Filter hanya yang online (ada di cache)
-        $this->activeUsers = $allUsers->filter(function ($user) {
-            return Cache::has('user-is-online-' . $user->id);
-        })->map(function ($user) {
-            return [
-                'id' => $user->id,
-                'name' => $user->name,
-                'no_hp' => $user->no_hp,
-                'last_seen_at' => $user->last_seen_at,
-                'is_online' => Cache::has('user-is-online-' . $user->id),
-                'last_login_at' => $user->last_login_at,
-                'role' => $user->getRoleNames()->first() ?: 'Tidak ada peran',
-            ];
-        })->toArray();
-    }
 
     public function test()
     {
@@ -77,6 +53,21 @@ class Dasbor extends Component
 
     public function render()
     {
-        return view('livewire.admin.dasbor');
+        $query = User::query();
+
+        if ($this->q) {
+            $query->where(function ($q) {
+                $q->where('name', 'like', '%' . $this->q . '%')
+                    ->orWhere('no_hp', 'like', '%' . $this->q . '%')
+                    ->orWhere('email', 'like', '%' . $this->q . '%');
+            });
+        }
+
+        // Hanya user yang aktif dalam 5 menit terakhir
+        $query->where('last_seen_at', '>=', now()->subMinutes(10));
+        return view('livewire.admin.dasbor')
+            ->with([
+                'users' => $query->paginate(10),
+            ]);
     }
 }
