@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Route;
 Route::impersonate();
 
 Route::get('/', function () {
-    return view('welcome');
+    if (env('APP_DEBUG') == 'true') {
+        return view('welcome');
+    } else {
+        return redirect()->route('login');
+    }
 });
 
 Route::middleware([
@@ -15,6 +19,6 @@ Route::middleware([
     'role:admin',
 ])->group(function () {
     Route::get('/dashboard', \App\Livewire\Admin\Dasbor::class)->name('admin-dashboard');
-    Route::get('/saksi',\App\Livewire\SaksiReference::class)->name('saksi');
+    Route::get('/saksi', \App\Livewire\SaksiReference::class)->name('saksi');
 
 });
