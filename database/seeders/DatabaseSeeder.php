@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'admin-dashboard',
             'saksi-dashboard',
             'saksi-admin-dashboard',
+            'saksi-koordinator-dashboard',
             'manage users',
             'saksi',
             'saksi-admin',
@@ -76,7 +77,7 @@ class DatabaseSeeder extends Seeder
                 'formulir-c1-validasi',
             ],
             'koordinator_saksi' => [
-                'saksi-dashboard',
+                'saksi-koordinator-dashboard',
                 'saksi',
                 'view-reports',
             ]
