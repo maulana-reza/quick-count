@@ -29,7 +29,7 @@
     @endforeach
     <div>
         <x-label class="text-base font-medium whitespace-nowrap" x-show="isSidebarOpen || isSidebarHovered">Hak akses</x-label>
-        <div class="bg-turquoise-500 py-1 px-3 rounded text-white my-2 shadow" x-show="isSidebarOpen || isSidebarHovered">
+        <div class="bg-turquoise-500 py-1 px-3 rounded text-white my-2 shadow text-sm" x-show="isSidebarOpen || isSidebarHovered">
             {!! \Illuminate\Support\Facades\Auth::user()->roles->implode('name', '</div><div class="text-white bg-orange-eval-0 py-1 px-3 rounded my-2 shadow">') !!}
         </div>
     </div>

@@ -33,7 +33,7 @@
             <x-icons.empty-circle class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         @endif
 
-        <span class="text-base font-medium" x-show="isSidebarOpen || isSidebarHovered">
+        <span class="text-sm font-medium" x-show="isSidebarOpen || isSidebarHovered">
             {{ $title }}
         </span>
     </a>

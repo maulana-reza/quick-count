@@ -19,10 +19,8 @@
     <div>
         @livewire('admin.chart')
     </div>
-    <div class="grid grid-cols-2 gap-4 custom-scrollbar dark:bg-dark-eval-1">
-        <div>
-            @livewire('admin-saksi.log')
-        </div>
+    <div class="grid md:grid-cols-2 grid-cols-1 gap-4 custom-scrollbar dark:bg-dark-eval-1">
+        @livewire('admin-saksi.log')
         <div class="custom-scrollbar dark:bg-dark-eval-1">
             <div
                 wire:poll.5s
@@ -38,7 +36,6 @@
                         <x-tall-crud-input-search/>
                     </div>
                 </div>
-
                 <table
                     class="w-full whitespace-nowrap rounded overflow-hidden table table-bordered dark:border-turquoise-500"
                     wire:loading.class.delay="opacity-50"
@@ -56,7 +53,7 @@
                     @forelse($users as $user)
                         <tr class="{{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-1' }}">
                             <td class="px-3 py-2 text-sm whitespace-pre-wrap"><span
-                                    class="text-green-500 text-xs">🟢</span> {{ $user->name ?? '-' }} ({{$user->roles->pluck('name')->implode(', ')}})</td>
+                                    class="text-green-500 text-xs">🟢</span> {{ $user->name ?? '-' }}({{$user->roles->pluck('name')->implode(', ')}})</td>
                             <td class="px-3 py-2 text-sm whitespace-pre-wrap">{!! \App\Helpers\Menu::chatWhatsapp($user->no_hp) !!}</td>
                             <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user->last_login_at ?? '-' }}</td>
                             <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $user->last_seen_at ?? '-' }}</td>
@@ -70,6 +67,9 @@
                     @endforelse
                     </tbody>
                 </table>
+                <div>
+                    {!! $users->links() !!}
+                </div>
             </div>
         </div>
     </div>

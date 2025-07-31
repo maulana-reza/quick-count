@@ -20,7 +20,9 @@ class Log extends Component
         $data = \App\Models\Log::latest()
             ->with(['user'])
             ->when($this->type, function ($query) {
-                $query->where('aksi', $this->type);
+                return $query->whereHas('user', function ($q) {
+                    $q->role($this->type);
+                });
             })
             ->when($this->q, function ($query) {
                 $query->where(function ($q) {

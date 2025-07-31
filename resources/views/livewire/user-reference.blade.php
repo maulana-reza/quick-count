@@ -37,17 +37,24 @@
                         <td class="px-3 py-2 text-sm whitespace-pre-wrap">{!! \App\Helpers\Menu::chatWhatsapp($result->no_hp) !!}</td>
                         <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $result->last_login_at }}</td>
                         <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $result->last_seen_at }}</td>
-                        <td class="px-3 py-2 text-sm whitespace-pre-wrap flex gap-2">
-                            <x-button variant="warning" type="submit"
-                                    wire:click="$dispatchTo('user-reference-child', 'showEditForm', { user: {{ $result->id}} });"
-                                    class="text-green-500">
-                                <x-tall-crud-icon-edit/>
-                            </x-button>
-                            <x-button variant="danger" type="submit"
-                                    wire:click="$dispatchTo('user-reference-child', 'showDeleteForm', { user: {{ $result->id}} });"
-                                    class="text-red-500">
-                                <x-tall-crud-icon-delete/>
-                            </x-button>
+                        <td class="px-3 py-2 text-sm">
+                            <div class="flex gap-2">
+                                <x-button variant="warning" type="submit"
+                                          wire:click="$dispatchTo('user-reference-child', 'showEditForm', { user: {{ $result->id}} });"
+                                          class="text-green-500">
+                                    <x-tall-crud-icon-edit/>
+                                </x-button>
+                                <x-button variant="danger" type="submit"
+                                          wire:click="$dispatchTo('user-reference-child', 'showDeleteForm', { user: {{ $result->id}} });"
+                                          class="text-red-500">
+                                    <x-tall-crud-icon-delete/>
+                                </x-button>
+                                <a href="{{ route('impersonate', ['id' => $result->id]) }}">
+                                    <x-button variant="secondary" type="submit">
+                                        Login Sebagai
+                                    </x-button>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 @empty

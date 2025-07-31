@@ -36,24 +36,33 @@
                     <td class="px-3 py-2 whitespace-pre-wrap text-sm">{{ $result->nama }}</td>
                     <td class="px-3 py-2 whitespace-pre-wrap text-sm">{{ $result->tps }}</td>
                     <td class="px-3 py-2 whitespace-pre-wrap text-sm">{{ $result->no_hp }}</td>
-                    <td class="px-3 py-2 whitespace-pre-wrap text-sm flex">
+                    <td class="px-3 py-2 ">
                         @if($result->foto)
                             <img src="{{ asset('storage/' . $result->foto) }}" alt="Foto Saksi"
                                  class="w-16 h-16 object-cover rounded">
                         @else
                             <span class="text-gray-500">No Photo</span>
-                        @endif
-                    <td class="px-3 py-2">
-                        <button type="submit"
-                                wire:click="$dispatchTo('saksi-reference-child', 'showEditForm', { saksi: {{ $result->id}} });"
-                                class="text-green-500">
+                    @endif
+                    <td class="px-3 py-2 flex gap-2 items-center"w>
+                        <x-button type="submit"
+                                  variant="warning"
+                                  wire:click="$dispatchTo('saksi-reference-child', 'showEditForm', { saksi: {{ $result->id}} });"
+                                  class="text-green-500">
                             <x-tall-crud-icon-edit/>
-                        </button>
-                        <button type="submit"
-                                wire:click="$dispatchTo('saksi-reference-child', 'showDeleteForm', { saksi: {{ $result->id}} });"
-                                class="text-red-500">
+                        </x-button>
+                        <x-button type="submit"
+                                  variant="danger"
+                                  wire:click="$dispatchTo('saksi-reference-child', 'showDeleteForm', { saksi: {{ $result->id}} });"
+                                  class="text-red-500">
                             <x-tall-crud-icon-delete/>
-                        </button>
+                        </x-button>
+                        @if(auth()->user()->can('manage users'))
+                            <a href="{{ route('impersonate', ['id' => $result->id]) }}">
+                                <x-button variant="secondary" type="submit">
+                                    Login Sebagai
+                                </x-button>
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @empty
