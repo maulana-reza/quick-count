@@ -97,12 +97,21 @@ class UserReferenceChild extends Component
     public function createItem(): void
     {
         $this->validate();
+        $currentRouteName = request()->route()->getName();
+
         $item = User::create([
             'name' => $this->item['name'] ?? '',
             'email' => $this->item['email'] ?? '',
             'no_hp' => $this->item['no_hp'] ?? '',
             'password' => bcrypt($this->item['password'] ?? ''),
         ]);
+        if ($currentRouteName === 'saksi-admin') {
+            $item->assignRole(User::ADMIN_SAKSI);
+        } elseif ($currentRouteName === 'saksi-koordinator') {
+            $item->assignRole(User::KOORDINATOR_SAKSI);
+        } else {
+            $item->assignRole(User::SAKSI);
+        }
         $this->confirmingItemCreation = false;
         $this->dispatch('refresh')->to('user-reference');
         $this->dispatch('show', 'Record Added Successfully')->to('livewire-toast');
@@ -129,6 +138,7 @@ class UserReferenceChild extends Component
         if (!empty($this->item['password'])) {
             $this->user->update(['password' => bcrypt($this->item['password'])]);
         }
+
         $this->confirmingItemEdit = false;
         $this->primaryKey = '';
         $this->dispatch('refresh')->to('user-reference');
