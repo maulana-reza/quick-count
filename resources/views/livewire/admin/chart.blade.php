@@ -25,7 +25,7 @@
                 const data = await response.json();
                 const updateTime = new Date(data.updated_at).toLocaleString('id-ID', {
                     dateStyle: 'medium',
-                    timeStyle: 'short',
+                    timeStyle: 'medium',
                 });
                 document.getElementById('update-time-value').textContent = updateTime;
                 if (!chart) {
