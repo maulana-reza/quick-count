@@ -20,7 +20,7 @@ class Dasbor extends Component
         $this->datas = [
             [
                 'icon' => 'akar-calendar',
-                'label' => 'Progress Saksi TPS',
+                'label' => 'Progress Formulir C1',
                 'value' => Formulir::count(),
             ],
             [

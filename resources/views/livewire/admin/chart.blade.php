@@ -9,7 +9,6 @@
                 <span id="update-time-value" class="text-xs font-semibold text-gray-700"></span>
             </div>
         </div>
-
         <div class="px-3 py-6 grid gap-2">
             <div id="chart-container" wire:ignore></div>
         </div>
