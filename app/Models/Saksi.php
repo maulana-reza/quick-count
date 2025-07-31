@@ -13,6 +13,7 @@ class Saksi extends Model
         'tps',
         'no_hp',
         'foto',
+        'village_id',
     ];
 
     public function laporanKejadian()

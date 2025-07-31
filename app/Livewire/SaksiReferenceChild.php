@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Livewire;
+use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use \Illuminate\View\View;
 use App\Models\Saksi;
+use Livewire\WithFileUploads;
 
 class SaksiReferenceChild extends Component
 {
+    use WithFileUploads;
 
     public $item=[];
 
@@ -29,6 +32,8 @@ class SaksiReferenceChild extends Component
         'item.tps' => '',
         'item.no_hp' => '',
         'item.foto' => '',
+        'item.email' => 'required|unique:users,email',
+        'item.password' => 'required|min:8',
     ];
 
     /**
@@ -40,6 +45,8 @@ class SaksiReferenceChild extends Component
         'item.tps' => 'No. TPS',
         'item.no_hp' => 'No. HP',
         'item.foto' => 'Foto',
+        'item.email' => 'Username',
+        'item.password' => 'Password',
     ];
 
     /**
@@ -97,12 +104,20 @@ class SaksiReferenceChild extends Component
     public function createItem(): void
     {
         $this->validate();
+        $user = User::create([
+            'name' => $this->item['nama'] ?? '',
+            'email' => $this->item['email'] ?? '',
+            'password' => bcrypt($this->item['password'] ?? ''),
+        ]);
+        $user->assignRole(User::SAKSI);
         $item = Saksi::create([
+            'user_id' => $user->id,
             'nik' => $this->item['nik'] ?? '',
             'nama' => $this->item['nama'] ?? '',
             'tps' => $this->item['tps'] ?? '',
             'no_hp' => $this->item['no_hp'] ?? '',
-            'foto' => $this->item['foto'] ?? '',
+            'village_id' => $this->item['village_id'] ?? null,
+            'foto' => $this->item['foto']->store('saksi-foto','public') ?? '',
         ]);
         $this->confirmingItemCreation = false;
         $this->dispatch('refresh')->to('saksi-reference');

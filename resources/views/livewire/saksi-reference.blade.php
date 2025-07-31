@@ -32,11 +32,17 @@
             <tbody class="divide-y divide-">
             @forelse($results as $result)
                 <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-0' }}">
-                    <td class="px-3 py-2">{{ $result->nik }}</td>
-                    <td class="px-3 py-2">{{ $result->nama }}</td>
-                    <td class="px-3 py-2">{{ $result->tps }}</td>
-                    <td class="px-3 py-2">{{ $result->no_hp }}</td>
-                    <td class="px-3 py-2">{{ $result->foto }}</td>
+                    <td class="px-3 py-2 whitespace-pre-wrap text-sm">{{ $result->nik }}</td>
+                    <td class="px-3 py-2 whitespace-pre-wrap text-sm">{{ $result->nama }}</td>
+                    <td class="px-3 py-2 whitespace-pre-wrap text-sm">{{ $result->tps }}</td>
+                    <td class="px-3 py-2 whitespace-pre-wrap text-sm">{{ $result->no_hp }}</td>
+                    <td class="px-3 py-2 whitespace-pre-wrap text-sm flex">
+                        @if($result->foto)
+                            <img src="{{ asset('storage/' . $result->foto) }}" alt="Foto Saksi"
+                                 class="w-16 h-16 object-cover rounded">
+                        @else
+                            <span class="text-gray-500">No Photo</span>
+                        @endif
                     <td class="px-3 py-2">
                         <button type="submit"
                                 wire:click="$dispatchTo('saksi-reference-child', 'showEditForm', { saksi: {{ $result->id}} });"
