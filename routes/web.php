@@ -57,6 +57,15 @@ Route::middleware([
     Route::get('tps',\App\Livewire\TpsReference::class)
         ->can('tps')
         ->name('tps');
+    Route::get('/saksi-dashboard', \App\Livewire\Saksi\Dasbor::class)
+        ->can('saksi-dashboard')
+        ->name('saksi-dashboard');
+    Route::get('/koordinator-saksi-dashboard', \App\Livewire\KoordinatorSaksi\Dasbor::class)
+        ->can('saksi-koordinator-dashboard')
+        ->name('saksi-koordinator-dashboard');
+    Route::get('/input-formulir', \App\Livewire\Saksi\Input::class)
+        ->can('formulir-input')
+        ->name('formulir-input');
 });
 
 Route::prefix('saksi-admin')->middleware([

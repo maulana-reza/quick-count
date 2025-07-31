@@ -5,10 +5,20 @@ return [
         'route' => 'admin-dashboard',
         'can' => 'admin-dashboard',
     ],
-    'Saksi Admin Dashboard' => [
+    'Admin Saksi Dashboard' => [
         'icon' => 'akar-dashboard',
         'route' => 'saksi-admin-dashboard',
         'can' => 'saksi-admin-dashboard',
+    ],
+    'Koordinator Saksi Dashboard' => [
+        'icon' => 'akar-dashboard',
+        'route' => 'koordinator-saksi-dashboard',
+        'can' => 'saksi-koordinator-dashboard',
+    ],
+    'Saksi Dashboard' => [
+        'icon' => 'akar-dashboard',
+        'route' => 'saksi-dashboard',
+        'can' => 'saksi-dashboard',
     ],
     'Saksi Admin' => [
         'icon' => 'akar-person',
