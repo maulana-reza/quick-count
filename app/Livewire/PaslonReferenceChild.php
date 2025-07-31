@@ -9,6 +9,7 @@ use App\Models\Paslon;
 class PaslonReferenceChild extends Component
 {
 
+    use \Livewire\WithFileUploads;
     public $item=[];
 
     /**
@@ -99,7 +100,7 @@ class PaslonReferenceChild extends Component
             'kepala' => $this->item['kepala'] ?? '',
             'wakil' => $this->item['wakil'] ?? '',
             'no_urut' => $this->item['no_urut'] ?? '',
-            'foto_kepala' => $this->item['foto_kepala'] ?? '',
+            'foto_kepala' => isset($this->item['foto_kepala']) ? $this->item['foto_kepala']->store('paslon-foto', 'public') : null,
         ]);
         $this->confirmingItemCreation = false;
         $this->dispatch('refresh')->to('paslon-reference');
@@ -123,8 +124,12 @@ class PaslonReferenceChild extends Component
             'kepala' => $this->item['kepala'] ?? '',
             'wakil' => $this->item['wakil'] ?? '',
             'no_urut' => $this->item['no_urut'] ?? '',
-            'foto_kepala' => $this->item['foto_kepala'] ?? '',
+
          ]);
+        if (isset($this->item['foto_kepala'])) {
+            $item->foto_kepala = $this->item['foto_kepala']->store('paslon-foto', 'public');
+            $item->save();
+        }
         $this->confirmingItemEdit = false;
         $this->primaryKey = '';
         $this->dispatch('refresh')->to('paslon-reference');
