@@ -78,7 +78,7 @@ class Menu
         $noHp = str_starts_with($noHp, '0') ? '62' . substr($noHp, 1) :
             (str_starts_with($noHp, '62') ? $noHp : '62' . $noHp);
         return "<a href='https://wa.me/{$noHp}?text=" . urlencode($message) . "' target='_blank' class='btn btn-success btn-sm'>
-            <i class='fab fa-whatsapp'></i> '.$noHp.'
+            <i class='fab fa-whatsapp'></i> $noHp
         </a>";
     }
 }
