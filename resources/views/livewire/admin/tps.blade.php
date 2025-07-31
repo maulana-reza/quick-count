@@ -8,11 +8,12 @@
         </div>
     </div>
     <table class="w-full whitespace-nowrap rounded dark:border-turquoise-500 table-bordered table overflow-hidden"
+           wire:ignore.self
            wire:poll.5s
            wire:loading.class.delay="opacity-50">
         <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
         <tr>
-            <td class="px-3 py-2">Kecamatan</td>
+            <td class="px-3 py-2">Provinsi - Kab/Kota - Kecamatan/Distrik</td>
             <td class="px-3 py-2" width="200">Jml. Suara Sah</td>
             <td class="px-3 py-2" width="200">Jml. Suara Tidak Sah</td>
             {{--            <td class="px-3 py-2" width="200">Aksi</td>--}}
@@ -22,7 +23,7 @@
         @forelse($tps as $tp)
             @php($suara = \App\Models\Formulir::countByDistrict($tp->code))
             <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-1' }}">
-                <td class="px-3 py-2 text-sm whitespace-pre-wrap">{!! $tp->city_name .' - '.$tp->name !!}</td>
+                <td class="px-3 py-2 text-sm whitespace-pre-wrap">{!! $tp->province_name.' - '.$tp->city_name .' - '.$tp->name !!}</td>
                 <td class="px-3 py-2 text-sm whitespace-pre-wrap text-center font-bold">{{ $suara['suara_sah'] ?? 0 }}</td>
                 <td class="px-3 py-2 text-sm whitespace-pre-wrap text-center font-bold">{{ $suara['suara_tidak_sah'] ?? 0 }}</td>
 {{--                <td class="px-3 py-2 text-sm whitespace-pre-wrap">--}}

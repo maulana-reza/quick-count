@@ -20,8 +20,8 @@
         @livewire('admin.chart')
     </div>
     <div class="grid md:grid-cols-2 grid-cols-1 gap-4 custom-scrollbar dark:bg-dark-eval-1">
-        @livewire('admin-saksi.log')
-        <div class="custom-scrollbar dark:bg-dark-eval-1">
+        @livewire('admin-saksi.log',[], key('admin-saksi-log'))
+        <div class="custom-scrollbar dark:bg-dark-eval-1" wire:ignore.self>
             <div
                 wire:poll.5s
                 class="grid grid-cols-1 gap-4"
@@ -74,6 +74,6 @@
         </div>
     </div>
     <div>
-        @livewire('admin.tps')
+        @livewire('admin.tps',[], key('admin-tps'))
     </div>
 </div>

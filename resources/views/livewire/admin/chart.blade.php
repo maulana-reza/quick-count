@@ -33,7 +33,7 @@
                         chart: { type: 'column' },
                         title: { text: '', align: 'left' },
                         xAxis: {
-                            title: { text: 'Distrik/Kecamatan' },
+                            title: { text: 'Pasangan Calon' },
                             categories: data.categories },
                         yAxis: {
                             min: 0,

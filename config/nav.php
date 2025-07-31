@@ -55,4 +55,9 @@ return [
         'route' => 'call-center',
         'can' => 'call-center',
     ],
+    'Input Formulir' => [
+        'icon' => 'akar-file',
+        'route' => 'formulir-input',
+        'can' => 'formulir-input',
+    ],
 ];

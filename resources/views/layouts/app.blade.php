@@ -37,6 +37,9 @@
         * {
             font-family: "Poppins", sans-serif;
         }
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
     @livewireStyles
     <script src="{{ asset('assets/js/app.js') }}?key={{uniqid()}}"></script>

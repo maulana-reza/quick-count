@@ -49,7 +49,8 @@ class KumpulkanFormulir extends Command
         );
 
     }
-    public function getDataCategories() : array
+
+    public function getDataCategories(): array
     {
         return Paslon::orderBy('no_urut')
             ->get()
@@ -79,7 +80,7 @@ class KumpulkanFormulir extends Command
         }
         foreach ($village as $villageItem) {
             $series[] = [
-                'name' => $villageItem->name . ' (' . $villageItem->code . ')',
+                'name' => $villageItem->city_name .' - '.$villageItem->city_name . ' - ' . $villageItem->name,
                 'data' => array_map(function ($paslonItem) use ($data, $villageItem) {
                     return $data[$paslonItem['no_urut']][$villageItem->code] ?? 0;
                 }, $paslon->toArray()),
