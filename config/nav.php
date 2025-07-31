@@ -12,7 +12,7 @@ return [
     ],
     'Koordinator Saksi Dashboard' => [
         'icon' => 'akar-dashboard',
-        'route' => 'koordinator-saksi-dashboard',
+        'route' => 'saksi-koordinator-dashboard',
         'can' => 'saksi-koordinator-dashboard',
     ],
     'Saksi Dashboard' => [
