@@ -137,18 +137,40 @@ class SaksiReferenceChild extends Component
     public function editItem(): void
     {
         $this->validate();
-        $item = $this->saksi->update([
+        $user = $this->saksi->user;
+        if ($user->email !== $this->item['email']) {
+            $this->validate([
+                'item.email' => 'required|unique:users,email,' . $user->id,
+            ]);
+            $user->email = $this->item['email'];
+            if (isset($this->item['password'])) {
+                $this->validate([
+                    'item.password' => 'required|min:8',
+                ]);
+                $user->password = bcrypt($this->item['password']);
+            }
+            $this->save();
+
+        }
+        $this->saksi->user->update([
+            'name' => $this->item['nama'] ?? '',
+            'email' => $this->item['email'] ?? '',
+            'password' => isset($this->item['password']) ? bcrypt($this->item['password']) : $this->saksi->user->password,
+        ]);
+        $this->saksi->update([
             'nik' => $this->item['nik'] ?? '',
             'nama' => $this->item['nama'] ?? '',
             'tps' => $this->item['tps'] ?? '',
             'no_hp' => $this->item['no_hp'] ?? '',
-            'foto' => $this->item['foto'] ?? '',
-         ]);
+        ]);
+        if (isset($this->item['foto'])) {
+            $this->saksi->foto = $this->item['foto']->store('saksi-foto', 'public');
+            $this->saksi->save();
+        }
         $this->confirmingItemEdit = false;
         $this->primaryKey = '';
         $this->dispatch('refresh')->to('saksi-reference');
         $this->dispatch('show', 'Record Updated Successfully')->to('livewire-toast');
-
     }
 
 }
