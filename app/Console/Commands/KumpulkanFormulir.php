@@ -80,7 +80,7 @@ class KumpulkanFormulir extends Command
         }
         foreach ($village as $villageItem) {
             $series[] = [
-                'name' => $villageItem->city_name .' - '.$villageItem->city_name . ' - ' . $villageItem->name,
+                'name' => $villageItem->province_name .' - '.$villageItem->city_name . ' - ' . $villageItem->name,
                 'data' => array_map(function ($paslonItem) use ($data, $villageItem) {
                     return $data[$paslonItem['no_urut']][$villageItem->code] ?? 0;
                 }, $paslon->toArray()),
