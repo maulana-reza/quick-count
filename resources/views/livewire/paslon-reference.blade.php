@@ -33,12 +33,7 @@
                     <td class="px-3 py-2 text-sm whitespace-pre-wrap" >{{ $result->kepala }}</td>
                     <td class="px-3 py-2 text-sm whitespace-pre-wrap" >{{ $result->wakil }}</td>
                     <td class="px-3 py-2 text-sm whitespace-pre-wrap" >{{ $result->no_urut }}</td>
-                    <td class="px-3 py-2 text-sm whitespace-pre-wrap flex" >
-                        @if($result->foto_kepala)
-                            <img src="{{ asset('storage/' . $result->foto_kepala) }}" alt="Foto Paslon" class="w-16 h-16 object-cover rounded">
-                        @else
-                            <span class="text-gray-500">No Photo</span>
-                        @endif
+                    <td class="px-3 py-2 text-sm whitespace-pre-wrap" >@if($result->foto_kepala)<img src="{{ asset('storage/' . $result->foto_kepala) }}" alt="Foto Paslon" class="w-16 h-16 object-cover rounded">@else<span class="text-gray-500">No Photo</span>@endif</td>
                     <td class="px-3 py-2 text-sm whitespace-pre-wrap flex gap-2" >
                         <x-button variant="warning" type="submit" wire:click="$dispatchTo('paslon-reference-child', 'showEditForm', { paslon: {{ $result->id}} });" class="text-green-500">
                             <x-tall-crud-icon-edit />
