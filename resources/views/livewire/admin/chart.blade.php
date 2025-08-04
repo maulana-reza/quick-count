@@ -1,15 +1,35 @@
 <div class="grid gap-2 md:grid-cols-1">
-    <div class="bg-white shadow rounded dark:bg-dark-eval-1 rounded-md overflow-hidden md:col-span-1">
-        <div class="ml-2 flex-grow p-3">
-            <div class="text-sm text-gray-500">
-                Statistik Jumlah Pemilih Pemilu
+    @php($currentRoute = \Illuminate\Support\Facades\Request::route()->getName())
+    <div class="bg-white shadow dark:bg-dark-eval-1 rounded-md overflow-hidden md:col-span-1 {{$currentRoute === 'quick-count' ? 'mt-24' : ''}}">
+        <div class="ml-2 flex-grow p-3 flex flex-between items-center justify-between">
+            <div>
+                <div class="text-sm text-gray-500">
+                    Statistik Jumlah Pemilih Pemilu
+                </div>
+                <div>
+                    <span class="text-xs text-gray-500">Terakhir diperbarui: </span>
+                    <span id="update-time-value" class="text-xs font-semibold text-gray-700"></span>
+                </div>
             </div>
             <div>
-                <span class="text-xs text-gray-500">Terakhir diperbarui: </span>
-                <span id="update-time-value" class="text-xs font-semibold text-gray-700"></span>
+                @if($currentRoute != 'quick-count')
+                    <a href="{{ route('quick-count') }}" class="text-xs text-blue-500 hover:underline">
+                        <x-button variant="primary" class="inline-flex items-center">
+                            <x-heroicon-o-arrow-right class="w-4 h-4 mr-1"/>
+                            Lihat Quick Count Secara Penuh
+                        </x-button>
+                    </a>
+                @else
+                    <a href="{{route('home')}}" class="text-xs text-blue-500 hover:underline">
+                        <x-button variant="primary" class="inline-flex items-center">
+                            <x-heroicon-o-arrow-left class="w-4 h-4 mr-1"/>
+                            Kembali ke Dasbor
+                        </x-button>
+                    </a>
+                @endif
             </div>
         </div>
-        <div class="px-3 py-6 grid gap-2">
+        <div class="px-3 py-6 grid gap-2 {{$currentRoute === 'quick-count' ? 'h-[80vh]' : ''}}">
             <div id="chart-container" wire:ignore></div>
         </div>
     </div>
@@ -18,9 +38,10 @@
 @section('js')
     <script type="module" defer>
         let chart;
+
         async function fetchChartData() {
             try {
-            const response = await fetch('{{ asset('storage/chart.json') }}', { cache: 'no-store' });
+                const response = await fetch('{{ asset('storage/chart.json') }}', {cache: 'no-store'});
                 const data = await response.json();
                 const updateTime = new Date(data.updated_at).toLocaleString('id-ID', {
                     dateStyle: 'medium',
@@ -29,20 +50,21 @@
                 document.getElementById('update-time-value').textContent = updateTime;
                 if (!chart) {
                     chart = Highcharts.chart('chart-container', {
-                        chart: { type: 'column' },
-                        title: { text: '', align: 'left' },
+                        chart: {type: 'column'},
+                        title: {text: '', align: 'left'},
                         xAxis: {
-                            title: { text: 'Pasangan Calon' },
-                            categories: data.categories },
+                            title: {text: 'Pasangan Calon'},
+                            categories: data.categories
+                        },
                         yAxis: {
                             min: 0,
-                            title: { text: 'Jumlah Pemilih' },
+                            title: {text: 'Jumlah Pemilih'},
                             stackLabels: {
                                 enabled: true,
                                 formatter: function () {
                                     return this.total.toLocaleString();
                                 },
-                                style: { fontWeight: 'bold', fontSize: '20px' }
+                                style: {fontWeight: 'bold', fontSize: '20px'}
                             }
                         },
                         legend: {
@@ -50,7 +72,7 @@
                             align: 'center',
                             verticalAlign: 'bottom',
                             layout: 'horizontal',
-                            itemStyle: { fontSize: '10px' }
+                            itemStyle: {fontSize: '10px'}
                         },
                         tooltip: {
                             shared: true,
@@ -82,7 +104,7 @@
                     });
                 } else {
                     chart.update({
-                        xAxis: { categories: data.categories },
+                        xAxis: {categories: data.categories},
                         series: data.series
                     }, true, true);
                 }
@@ -90,6 +112,7 @@
                 console.error("Gagal mengambil data chart:", err);
             }
         }
+
         // Ambil pertama kali
         fetchChartData();
         // Ambil ulang tiap 10 detik

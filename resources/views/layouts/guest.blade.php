@@ -41,6 +41,9 @@
             </x-button>
         </div>
     </div>
+    @stack('modals')
+    @stack('js')
+    @yield('js')
 </body>
 @livewireScripts
 

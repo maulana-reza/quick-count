@@ -8,6 +8,7 @@ class Chart extends Component
 {
     public function render()
     {
-        return view('livewire.admin.chart');
+        return view('livewire.admin.chart')
+            ->layout('layouts.guest');
     }
 }

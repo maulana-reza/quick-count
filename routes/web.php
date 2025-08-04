@@ -66,6 +66,8 @@ Route::middleware([
     Route::get('/input-formulir', \App\Livewire\Saksi\Input::class)
         ->can('formulir-input')
         ->name('formulir-input');
+    Route::get('/quick-count', \App\Livewire\Admin\Chart::class)
+        ->name('quick-count');
 });
 
 Route::prefix('saksi-admin')->middleware([
