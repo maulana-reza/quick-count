@@ -43,26 +43,28 @@
                         @else
                             <span class="text-gray-500">No Photo</span>
                     @endif
-                    <td class="px-3 py-2 flex gap-2 items-center" w>
-                        <x-button type="submit"
-                                  variant="warning"
-                                  wire:click="$dispatchTo('saksi-reference-child', 'showEditForm', { saksi: {{ $result->id}} });"
-                                  class="text-green-500">
-                            <x-tall-crud-icon-edit/>
-                        </x-button>
-                        <x-button type="submit"
-                                  variant="danger"
-                                  wire:click="$dispatchTo('saksi-reference-child', 'showDeleteForm', { saksi: {{ $result->id}} });"
-                                  class="text-red-500">
-                            <x-tall-crud-icon-delete/>
-                        </x-button>
-                        @if(auth()->user()->can('manage users'))
-                            <a href="{{ route('impersonate', ['id' => $result->id]) }}">
-                                <x-button variant="secondary" type="submit">
-                                    Login Sebagai
-                                </x-button>
-                            </a>
-                        @endif
+                    <td class="px-3 py-2 gap-2 ">
+                        <div class="flex gap-2 items-center justify-content-center justify-items-center text-xs">
+                            <x-button type="submit"
+                                      variant="warning"
+                                      wire:click="$dispatchTo('saksi-reference-child', 'showEditForm', { saksi: {{ $result->id}} });"
+                                      class="text-green-500 text-xs">
+                                <x-tall-crud-icon-edit class="w-3 h-3"/>
+                            </x-button>
+                            <x-button type="submit"
+                                      variant="danger"
+                                      wire:click="$dispatchTo('saksi-reference-child', 'showDeleteForm', { saksi: {{ $result->id}} });"
+                                      class="text-red-500 text-xs">
+                                <x-tall-crud-icon-delete/>
+                            </x-button>
+                            @if(auth()->user()->can('manage users'))
+                                <a href="{{ route('impersonate', ['id' => $result->id]) }}">
+                                    <x-button variant="secondary" class="text-xs" type="submit">
+                                        Login Sebagai
+                                    </x-button>
+                                </a>
+                            @endif
+                        </div>
                     </td>
                 </tr>
             @empty

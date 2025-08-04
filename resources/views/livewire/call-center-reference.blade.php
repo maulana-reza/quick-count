@@ -30,7 +30,9 @@
             <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-1' }}">
                 <td class="px-3 py-2  text-sm whitespace-pre-wrap">{{ $result->nama }}</td>
                 <td class="px-3 py-2  text-sm whitespace-pre-wrap">{{ $result->no_hp }}</td>
-                <td class="px-3 py-2  text-sm whitespace-pre-wrap flex gap-2">
+                <td class="px-3 py-2  text-sm whitespace-pre-wrap ">
+                    <div class="flex gap-2 items-center justify-content-center justify-items-center text-xs">
+
                     <x-button variant="warning" type="submit"
                               wire:click="$dispatchTo('call-center-reference-child', 'showEditForm', { callcenter: {{ $result->id}} });"
                               class="text-green-500">
@@ -41,6 +43,7 @@
                               class="text-red-500">
                         <x-tall-crud-icon-delete/>
                     </x-button>
+                    </div>
                 </td>
             </tr>
         @empty

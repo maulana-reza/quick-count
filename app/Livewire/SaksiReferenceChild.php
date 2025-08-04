@@ -105,7 +105,11 @@ class SaksiReferenceChild extends Component
 
     public function createItem(): void
     {
-        $this->validate();
+        $this->validate(
+            $this->rules,
+            [],
+            $this->validationAttributes
+        );
         $user = User::create([
             'name' => $this->item['nama'] ?? '',
             'email' => $this->item['email'] ?? '',

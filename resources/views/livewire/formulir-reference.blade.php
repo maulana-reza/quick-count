@@ -23,14 +23,20 @@
             @forelse($results as $result)
                 <tr class="text-left bg-turquoise-500 turquoise-500">
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->saksi->nama }}</td>
-                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">@if($result->foto_formulir)<a href="{{ asset('storage/' . $result->foto_formulir) }}" target="_blank"
-                               class="text-blue-500 hover:underline">Lihat Foto</a>@else Tidak ada foto @endif
+                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">@if($result->foto_formulir)<a
+                            href="{{ asset('storage/' . $result->foto_formulir) }}" target="_blank"
+                            class="text-blue-500 hover:underline">Lihat Foto</a>@else Tidak ada foto @endif
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->status_form }}</td>
-                    <td class="px-3 py-2 text-xs whitespace-pre-wrap"><x-button variant="danger" type="submit"
-                                  wire:click="$dispatchTo('formulir-reference-child', 'showDeleteForm', { formulir: {{ $result->id}} });"
-                                  class="text-red-500">
-                            <x-tall-crud-icon-delete/>
-                        </x-button></td>
+                    <td class="px-3 py-2 text-xs">
+                        <div class="flex gap-2 items-center justify-content-center justify-items-center text-xs">
+
+                            <x-button variant="danger" type="submit"
+                                      wire:click="$dispatchTo('formulir-reference-child', 'showDeleteForm', { formulir: {{ $result->id}} });"
+                                      class="text-red-500">
+                                <x-tall-crud-icon-delete/>
+                            </x-button>
+                        </div>
+                    </td>
                 </tr>
             @empty
                 <tr>
