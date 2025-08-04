@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 gap-4 custom-scrollbar dark:bg-dark-eval-1">
+<div class="grid grid-cols-1 gap-4 custom-scrollbar">
     <x-label class="text-2xl font-semibold">
         Aktivitas {{ $type ? \App\Models\User::ROLES[$type] : 'Pengguna (Saksi, Saksi Koordinator, Saksi Admin)' }}
     </x-label>

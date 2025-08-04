@@ -19,9 +19,9 @@
     <div>
         @livewire('admin.chart')
     </div>
-    <div class="grid md:grid-cols-2 grid-cols-1 gap-4 custom-scrollbar dark:bg-dark-eval-1">
+    <div class="grid md:grid-cols-2 grid-cols-1 gap-4 custom-scrollbar">
         @livewire('admin-saksi.log',[], key('admin-saksi-log'))
-        <div class="custom-scrollbar dark:bg-dark-eval-1" wire:ignore.self>
+        <div class="custom-scrollbar" wire:ignore.self>
             <div
                 wire:poll.5s
                 class="grid grid-cols-1 gap-4"

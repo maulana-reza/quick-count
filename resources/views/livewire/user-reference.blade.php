@@ -1,4 +1,4 @@
-<div class="rounded-lg custom-scrollbar dark:bg-dark-eval-1 grid grid-cols-1 gap-4">
+<div class="rounded-lg custom-scrollbar grid grid-cols-1 gap-4">
     <div class="flex justify-between">
         <div class="text-2xl">
         </div>
