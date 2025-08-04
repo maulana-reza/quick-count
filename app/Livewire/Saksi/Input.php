@@ -46,6 +46,7 @@ class Input extends Component
                 'foto' => $this->item['foto'] ? $this->item['foto']->store($path, 'public') : null,
                 'suara_tidak_sah' => $this->item['suara_tidak_sah'],
                 'status_form' => Formulir::BELUM_VALID,
+                'nomor_tps' => $this->item['nomor_tps'] ?? null,
             ]);
             Paslon::all()->each(function ($paslon) use ($form) {
                 DataFormulir::create([

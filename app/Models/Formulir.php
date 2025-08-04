@@ -25,6 +25,7 @@ class Formulir extends Model
         'status_kejadian',
         'tps_id',
         'suara_tidak_sah',
+        'nomor_tps'
     ];
     protected static function booted()
     {
