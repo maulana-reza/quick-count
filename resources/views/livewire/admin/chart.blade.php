@@ -15,7 +15,6 @@
     </div>
 </div>
 @section('plugins.Chartjs', true)
-
 @section('js')
     <script type="module" defer>
         let chart;
