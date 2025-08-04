@@ -19,12 +19,12 @@
         </thead>
         <tbody class="divide-y divide-gray-200">
         @forelse($logs as $log)
-            <tr class="text-left font-bold bg-turquoise-500 turquoise-500">
+            <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-0' }}">
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap"
                     width="200">{{ $log->created_at->format('d-m-Y H:i:s') }}</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap"
                     width="200">{{ $log->user->name ?? 'Unknown User' }} ({{$log->user->roles->pluck('name')->implode(', ')}})</td>
-                <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $log->ip_address }}</td>
+                <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $log->keterangan }}</td>
             </tr>
         @empty
             <tr class="bg-white">

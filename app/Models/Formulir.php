@@ -30,27 +30,33 @@ class Formulir extends Model
     {
         static::created(function ($model) {
             if ($model->foto_kejadian) {
-                $words = 'Formulir dengan ID %s telah dibuat oleh %s, status formulir : %s, laporan kejadian : %s';
+                $words = 'Formulir dengan di lokasi %s telah dibuat oleh %s, status formulir : %s, laporan kejadian : %s';
                 $words .= ', dengan keterangan : %s';
-                $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form, $model->laporan_kejadian, $model->foto_kejadian);
+                $lokasi = str_replace('/',' -> ',self::path($model->village_id));
+                $words = sprintf($words, $lokasi, auth()->user()->name, $model->status_form, $model->laporan_kejadian, $model->foto_kejadian);
             }else{
-                $words = 'Formulir dengan ID %s telah dibuat oleh %s, status formulir : %s';
+                $lokasi = str_replace('/',' -> ',self::path($model->village_id));
+                $words = 'Formulir dengan di lokasi %s telah ditambahkan oleh %s, status formulir : %s';
+                $words = sprintf($words, $lokasi, auth()->user()->name, $model->status_form);
+
             }
             Log::create([
                 'aksi' => 'Menambahkan formulir',
-                'keterangan' => sprintf($words, $model->id, auth()->user()->name, $model->status_form),
+                'keterangan' => $words,
                 'user_id' => auth()->id(),
             ]);
         });
 
         static::updated(function ($model) {
             if (auth()->user()->hasRole(User::KOORDINATOR_SAKSI)){
-                $words = 'Formulir dengan ID %s telah diperbarui oleh %s, status formulir : %s, laporan kejadian : %s';
+                $lokasi = str_replace('/',' -> ',self::path($model->village_id));
+                $words = 'Formulir dilokasi %s telah diperbarui oleh %s, status formulir : %s, laporan kejadian : %s';
                 $words .= ', dengan keterangan : %s';
                 $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form, $model->laporan_kejadian, $model->foto_kejadian);
             }else{
-                $words = 'Formulir dengan ID %s telah diperbarui oleh %s, status formulir : %s';
-                $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form);
+                $lokasi = str_replace('/',' -> ',self::path($model->village_id));
+                $words = 'Formulir dengan dilokasi %s telah diperbarui oleh %s, status formulir : %s';
+                $words = sprintf($words, $lokasi, auth()->user()->name, $model->status_form);
             }
             Log::create([
                 'user_id' => auth()->id(),
@@ -154,6 +160,5 @@ class Formulir extends Model
     {
         $village = Village::findOrFail($village_id);
         return sprintf('%s/%s/%s',$village->city_name, $village->district_name, $village->name);
-
     }
 }
