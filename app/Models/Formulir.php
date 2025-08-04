@@ -12,6 +12,8 @@ class Formulir extends Model
     const TIDAK_VALID = 'tidak valid';
     const KEJADIAN_BELUM_DITANGANI = 'kejadian belum ditangani';
     const KEJADIAN_SUDAH_DITANGANI = 'kejadian sudah ditangani';
+    const KEJADIAN_DITINDAKlANJUTI = 'kejadian ditindaklanjuti';
+
     protected $table = 'formulir';
 
     protected $fillable = [

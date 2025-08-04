@@ -57,9 +57,10 @@ class Input extends Component
             });
             if (isset($this->item['laporan_kejadian']) && $this->item['laporan_kejadian'] !== '') {
                 $form->laporan_kejadian = $this->item['laporan_kejadian'];
-                $form->foto_kejadian = $this->item['foto_kejadian'] ? $this->item['foto_kejadian']->store('saksi', 'public') : null;
+                $form->foto_kejadian = $this->item['foto_kejadian'] ? $this->item['foto_kejadian']->store('saksi/laporan', 'public') : null;
                 $form->status_kejadian = Formulir::KEJADIAN_BELUM_DITANGANI;
                 $form->save();
+                dd($form);
             }
             $this->dispatch('show', 'Berhasil menginput data formulir')->to('livewire-toast');
             DB::commit();

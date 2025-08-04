@@ -25,9 +25,8 @@ class Dasbor extends Component
             ],
             [
                 'icon' => 'heroicon-o-user',
-                'label' => 'Jumlah Koordinator Saksi',
-                'value' => User::role(User::KOORDINATOR_SAKSI)
-                    ->count(),
+                'label' => 'Jumlah Pengaduan',
+                'value' => Formulir::whereNotNull('laporan_kejadian')->count(),
             ]
         ];
 

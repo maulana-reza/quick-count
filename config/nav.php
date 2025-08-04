@@ -50,6 +50,11 @@ return [
         'route' => 'formulir-c1-validasi',
         'can' => 'formulir-c1-validasi',
     ],
+    'Pengaduan Saksi TPS' => [
+        'icon' => 'akar-circle-alert',
+        'route' => 'formulir-pengaduan',
+        'can' => 'formulir-pengaduan',
+    ],
     'Call Center' => [
         'icon' => 'akar-phone',
         'route' => 'call-center',

@@ -28,7 +28,10 @@
                          label="Desa"
                          name="item.village_id"/>
     @endif
-    <x-default-input type="file" name="item.foto" label="Formulir C1"/>
+    <div class="flex gap-2 w-full">
+        <x-default-input type="number" name="item.nomor_tps" label="Nomor TPS"/>
+        <x-default-input class="flex-grow" type="file" name="item.foto" label="Formulir C1"/>
+    </div>
     <div>
         <x-label for="item.paslon" class="mb-2">Suara Pasangan Calon</x-label>
         <div class="grid md:grid-cols-3 grid-cols-1 gap-2">
@@ -59,7 +62,7 @@
         </div>
         <div x-show="isOpen" class="grid grid-cols-1 gap-2 mt-2">
             <x-default-input type="textarea" name="item.laporan_kejadian" label="Keterangan Laporan"/>
-            <x-default-input type="file" name="item.laporan" label="Unggah Bukti Laporan"/>
+            <x-default-input type="file" name="item.foto_kejadian" label="Unggah Bukti Laporan"/>
         </div>
     </div>
     <x-button type="submit" class="mt-2 flex gap-4" wire:click="save">

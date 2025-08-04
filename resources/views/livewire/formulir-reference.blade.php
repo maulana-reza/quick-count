@@ -14,6 +14,10 @@
             <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
             <tr class="">
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">#</td>
+                @if($currentRoute == 'formulir-pengaduan')
+                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">Laporan Pengaduan</td>
+                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">Bukti Laporan</td>
+                @endif
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">Nama Saksi</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">Lokasi</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">Foto Formulir C1</td>
@@ -25,8 +29,15 @@
             @forelse($results as $result)
                 <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-0' }}">
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $loop->iteration+1 }}</td>
+                    @if($currentRoute == 'formulir-pengaduan')
+                        <td class="px-3 py-2 text-xs whitespace-pre-wrap">{!! $result->laporan_kejadian !!}</td>
+                        <td class="px-3 py-2 text-xs whitespace-pre-wrap">@if($result->foto_kejadian)<a href="#"
+                                   onclick="window.open('{{ asset('storage/' . $result->foto_kejadian) }}', 'popup', 'width=800,height=600,scrollbars=yes,resizable=yes'); return false;"
+                                   class="text-blue-500 hover:underline">Lihat Bukti</a>@else Tidak ada bukti @endif</td>
+                    @endif
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->saksi->nama }} ({!! \App\Helpers\Menu::chatWhatsapp($result->saksi->no_hp) !!})</td>
-                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ \App\Models\Formulir::path($result->village_id) }} No. TPS {{$result->nomor_tps}}</td>
+                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ \App\Models\Formulir::path($result->village_id) }}
+                        No. TPS {{$result->nomor_tps}}</td>
                     <td class="px-3 py-2 text-xs">@if($result->foto)<a href="#"
                                                                        onclick="window.open('{{ asset('storage/' . $result->foto) }}', 'popup', 'width=800,height=600,scrollbars=yes,resizable=yes'); return false;"
                                                                        class="text-blue-500 hover:underline">Lihat Foto
@@ -38,7 +49,11 @@
                             <x-button variant="success" class="text-green-500 text-xs flex gap-2"
                                       wire:click="validateForm({{ $result->id }})">
                                 <x-icon name="heroicon-o-check" class="h-4 w-4"/>
-                                VALID
+                                @if($currentRoute == 'formulir-pengaduan')
+                                    DITINDAKLANJUTI
+                                @else
+                                    VALID
+                                @endif
                             </x-button>
                             <x-button variant="danger" class="text-red-500 text-xs flex gap-2"
                                       wire:click="invalidateForm({{ $result->id }})">
@@ -62,7 +77,11 @@
             <x-slot name="content">
                 @if($confirm == 1)
                     <div class="text-sm text-gray-700">
-                        Apakah Anda yakin ingin menandai formulir ini sebagai valid?
+                        @if($currentRoute == 'formulir-pengaduan')
+                            Apakah
+                        @else
+                            Apakah Anda yakin ingin menandai formulir ini sebagai valid?
+                        @endif
                     </div>
                 @elseif($confirm == 2)
                     <div class="text-sm text-gray-700">

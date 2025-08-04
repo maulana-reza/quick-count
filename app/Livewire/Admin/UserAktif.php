@@ -23,7 +23,6 @@ class UserAktif extends Component
                     ->orWhere('email', 'like', '%' . $this->q . '%');
             });
         }
-
         // Hanya user yang aktif dalam 5 menit terakhir
         $query->where('last_seen_at', '>=', now()->subMinutes(10));
         return view('livewire.admin.user-aktif')

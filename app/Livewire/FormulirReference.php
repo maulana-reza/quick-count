@@ -28,10 +28,13 @@ class FormulirReference extends Component
      */
     public $per_page = 15;
     public $selected_formulir;
+    public ?string $currentRoute;
 
 
     public function mount(): void
     {
+        $this->currentRoute = request()->route()->getName();
+
 
     }
 
@@ -70,18 +73,25 @@ class FormulirReference extends Component
         if ($this->confirm == 1) {
             $formulir = Formulir::find($this->selected_formulir);
             if ($formulir) {
-                $formulir->update(['status_form' => Formulir::SUDAH_VALID]);
+                if ($this->currentRoute == 'formulir-pengaduan') {
+                    $formulir->update(['status_kejadian' => Formulir::KEJADIAN_DITINDAKlANJUTI]);
+                } else {
+                    $formulir->update(['status_form' => Formulir::SUDAH_VALID]);
+                }
                 $this->dispatch('show', 'Formulir has been validated successfully.')->to('livewire-toast');
             }
         } elseif ($this->confirm == 2) {
             $formulir = Formulir::find($this->selected_formulir);
             if ($formulir) {
-                $formulir->update(['status_form' => Formulir::TIDAK_VALID]);
+                if ($this->currentRoute == 'formulir-pengaduan') {
+                    $formulir->update(['status_kejadian' => Formulir::TIDAK_VALID]);
+                }else{
+                    $formulir->update(['status_form' => Formulir::TIDAK_VALID]);
+                }
                 $this->dispatch('show', 'Formulir has been invalidated successfully.')->to('livewire-toast');
             }
         }
         $this->confirm = '';
-
     }
 
     public function updatingPerPage(): void
@@ -93,6 +103,9 @@ class FormulirReference extends Component
 
     public function query(): Builder
     {
-        return Formulir::query();
+        return Formulir::query()
+            ->when($this->currentRoute == 'formulir-pengaduan',function ($builder) {
+                return $builder->whereNotNull('laporan_kejadian');
+            });
     }
 }
