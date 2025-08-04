@@ -67,5 +67,8 @@
         @if($iconOnly)
             <span class="sr-only">{{ $srText ?? '' }}</span>
         @endif
+        @if($attributes->has('wire:click'))
+            <x-icon wire:target="{{$attributes->get('wire:click')}}" wire:loading class="animate-spin h-4" name="akar-arrow-cycle"/>
+        @endif
     </button>
 @endif

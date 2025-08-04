@@ -11,7 +11,6 @@ use Livewire\WithPagination;
 
 class Dasbor extends Component
 {
-    use WithPagination;
     public ?array $datas;
     public ?array $activeUsers = [];
 
@@ -44,7 +43,6 @@ class Dasbor extends Component
         ];
     }
 
-    public ?string $q = '';
 
     public function test()
     {
@@ -53,21 +51,6 @@ class Dasbor extends Component
 
     public function render()
     {
-        $query = User::query();
-
-        if ($this->q) {
-            $query->where(function ($q) {
-                $q->where('name', 'like', '%' . $this->q . '%')
-                    ->orWhere('no_hp', 'like', '%' . $this->q . '%')
-                    ->orWhere('email', 'like', '%' . $this->q . '%');
-            });
-        }
-
-        // Hanya user yang aktif dalam 5 menit terakhir
-        $query->where('last_seen_at', '>=', now()->subMinutes(10));
-        return view('livewire.admin.dasbor')
-            ->with([
-                'users' => $query->paginate(10),
-            ]);
+        return view('livewire.admin.dasbor');
     }
 }

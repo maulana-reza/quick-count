@@ -59,12 +59,12 @@
                     <x-default-input type="select"
                                      :option="\Laravolt\Indonesia\Models\Village::where('district_code', $item['district_code'])->get()->pluck('name', 'id')"
                                      label="Desa"
-                                     name="item.id"/>
+                                     name="item.village_id"/>
                 @else
                     <x-default-input type="select"
                                      :option="[]"
                                      label="Desa"
-                                     name="item.id"
+                                     name="item.village_id"
                                      wire:model="item.district_code"/>
                 @endif
                 <div>
