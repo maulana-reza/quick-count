@@ -23,15 +23,8 @@
             @forelse($results as $result)
                 <tr class="text-left bg-turquoise-500 turquoise-500">
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->saksi->nama }}</td>
-                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">
-                        @if($result->foto_formulir)
-                            <a href="{{ asset('storage/' . $result->foto_formulir) }}" target="_blank"
-                               class="text-blue-500 hover:underline">
-                                Lihat Foto
-                            </a>
-                        @else
-                            Tidak ada foto
-                    @endif
+                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">@if($result->foto_formulir)<a href="{{ asset('storage/' . $result->foto_formulir) }}" target="_blank"
+                               class="text-blue-500 hover:underline">Lihat Foto</a>@else Tidak ada foto @endif
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->status_form }}</td>
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">
                         <x-button variant="danger" type="submit"
