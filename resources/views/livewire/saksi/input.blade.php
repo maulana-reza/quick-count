@@ -10,8 +10,7 @@
         <x-default-input type="select"
                          :option="\Laravolt\Indonesia\Models\District::where('city_code', $item['city_code'])->get()->pluck('name', 'code')"
                          label="Kecamatan/Distrik"
-                         name="item.district_code"
-                         wire:model="item.city_code"/>
+                         name="item.district_code"/>
     @else
         <x-default-input type="select"
                          :option="[]"
@@ -27,8 +26,7 @@
         <x-default-input type="select"
                          :option="[]"
                          label="Desa"
-                         name="item.id"
-                         wire:model="item.district_code"/>
+                         name="item.village_id"/>
     @endif
     <x-default-input type="file" name="item.foto" label="Formulir C1"/>
     <div>

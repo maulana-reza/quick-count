@@ -78,4 +78,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function saksi()
+    {
+        return $this->hasOne(Saksi::class, 'user_id');
+    }
 }

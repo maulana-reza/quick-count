@@ -7,6 +7,11 @@ use Laravolt\Indonesia\Models\Village;
 
 class Formulir extends Model
 {
+    const BELUM_VALID = 'belum di validasi';
+    const SUDAH_VALID = 'sudah valid';
+    const TIDAK_VALID = 'tidak valid';
+    const KEJADIAN_BELUM_DITANGANI = 'kejadian belum ditangani';
+    const KEJADIAN_SUDAH_DITANGANI = 'kejadian sudah ditangani';
     protected $table = 'formulir';
 
     protected $fillable = [
@@ -25,11 +30,11 @@ class Formulir extends Model
     {
         static::created(function ($model) {
             if ($model->foto_kejadian) {
-                $words = 'Formulir dengan ID %S telah dibuat oleh %s, status formulir : %s, laporan kejadian : %s';
+                $words = 'Formulir dengan ID %s telah dibuat oleh %s, status formulir : %s, laporan kejadian : %s';
                 $words .= ', dengan keterangan : %s';
                 $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form, $model->laporan_kejadian, $model->foto_kejadian);
             }else{
-                $words = 'Formulir dengan ID %S telah dibuat oleh %s, status formulir : %s';
+                $words = 'Formulir dengan ID %s telah dibuat oleh %s, status formulir : %s';
             }
             Log::create([
                 'aksi' => 'Menambahkan formulir',
@@ -40,11 +45,11 @@ class Formulir extends Model
 
         static::updated(function ($model) {
             if (auth()->user()->hasRole(User::KOORDINATOR_SAKSI)){
-                $words = 'Formulir dengan ID %S telah diperbarui oleh %s, status formulir : %s, laporan kejadian : %s';
+                $words = 'Formulir dengan ID %s telah diperbarui oleh %s, status formulir : %s, laporan kejadian : %s';
                 $words .= ', dengan keterangan : %s';
                 $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form, $model->laporan_kejadian, $model->foto_kejadian);
             }else{
-                $words = 'Formulir dengan ID %S telah diperbarui oleh %s, status formulir : %s';
+                $words = 'Formulir dengan ID %s telah diperbarui oleh %s, status formulir : %s';
                 $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form);
             }
             Log::create([
@@ -144,6 +149,11 @@ class Formulir extends Model
             'suara_sah' => $suara_sah,
             'suara_tidak_sah' => $suara_tidak_sah,
         ];
+    }
+    public static function path($village_id) : string
+    {
+        $village = Village::findOrFail($village_id);
+        return sprintf('%s/%s/%s',$village->city_name, $village->district_name, $village->name);
 
     }
 }

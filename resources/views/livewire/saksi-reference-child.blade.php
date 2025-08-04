@@ -40,14 +40,12 @@
                                      $query->where('name', 'papua');
                                     })->get()->pluck('name', 'code')"
                                  label="Kota/Kabupaten"
-                                 name="item.city_code"
-                                 wire:model="item.province_code"/>
+                                 name="item.city_code"/>
                 @if(isset($item['city_code']))
                     <x-default-input type="select"
                                      :option="\Laravolt\Indonesia\Models\District::where('city_code', $item['city_code'])->get()->pluck('name', 'code')"
                                      label="Kecamatan/Distrik"
-                                     name="item.district_code"
-                                     wire:model="item.city_code"/>
+                                     name="item.district_code"/>
                 @else
                     <x-default-input type="select"
                                      :option="[]"
@@ -64,8 +62,7 @@
                     <x-default-input type="select"
                                      :option="[]"
                                      label="Desa"
-                                     name="item.village_id"
-                                     wire:model="item.district_code"/>
+                                     name="item.village_id"/>
                 @endif
                 <div>
                     <x-tall-crud-label>No. TPS</x-tall-crud-label>
@@ -118,14 +115,12 @@
                                      $query->where('name', 'papua');
                                     })->get()->pluck('name', 'code')"
                                  label="Kota/Kabupaten"
-                                 name="item.city_code"
-                                 wire:model="item.province_code"/>
+                                 name="item.city_code"/>
                 @if(isset($item['city_code']))
                     <x-default-input type="select"
                                      :option="\Laravolt\Indonesia\Models\District::where('city_code', $item['city_code'])->get()->pluck('name', 'code')"
                                      label="Kecamatan/Distrik"
-                                     name="item.district_code"
-                                     wire:model="item.city_code"/>
+                                     name="item.district_code"/>
                 @else
                     <x-default-input type="select"
                                      :option="[]"
@@ -142,8 +137,7 @@
                     <x-default-input type="select"
                                      :option="[]"
                                      label="Desa"
-                                     name="item.village_id"
-                                     wire:model="item.district_code"/>
+                                     name="item.village_id"/>
                 @endif
                 <div>
                     <x-tall-crud-label>No. TPS</x-tall-crud-label>

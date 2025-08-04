@@ -13,7 +13,8 @@ class Dasbor extends Component
             [
                 'icon' => 'akar-file',
                 'label' => 'Progress Penginputan TPS anda',
-                'value' => \App\Models\Formulir::where('saksi_id', auth()->id())
+                'value' => \App\Models\Formulir::where('saksi_id', auth()->user()->saksi->id)
+                    ->get()
                     ->count(),
             ],
         ];
