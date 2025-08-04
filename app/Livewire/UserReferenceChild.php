@@ -25,10 +25,10 @@ class UserReferenceChild extends Component
      * @var array
      */
     protected $rules = [
-        'item.name' => '',
-        'item.email' => '',
-        'item.no_hp' => '',
-        'item.password' => '',
+        'item.name' => 'required',
+        'item.email' => 'required',
+        'item.no_hp' => 'required',
+        'item.password' => 'required',
     ];
 
     /**
