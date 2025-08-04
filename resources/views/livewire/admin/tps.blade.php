@@ -14,8 +14,7 @@
                wire:loading.class.delay="opacity-50">
             <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
             <tr>
-                <td class="px-3 py-2 text-xs whitespace-pre-wrap">Provinsi - Kab/Kota - Kecamatan/Distrik - Kel/Desa
-                </td>
+                <td class="px-3 py-2 text-xs whitespace-pre-wrap">Provinsi - Kab/Kota - Kecamatan/Distrik - Kel/Desa</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap" width="200">Jml. Suara Sah</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap" width="200">Jml. Suara Tidak Sah</td>
                 {{--            <td class="px-3 py-2" width="200">Aksi</td>--}}
