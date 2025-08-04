@@ -53,7 +53,7 @@
                 </tr>
             @empty
                 <tr class="bg-white">
-                    <td colspan="4" class="text-center py-4 text-gray-500 border">
+                    <td colspan="4" class="text-center py-4 text-gray-500 border text-xs">
                         Tidak ada data TPS ditemukan.
                     </td>
                 </tr>

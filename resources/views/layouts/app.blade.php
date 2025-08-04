@@ -73,7 +73,6 @@
 
                 </div>
             </header>
-
             <!-- Page Content -->
             <main class="flex-1 p-4 mx-auto max-w-8xl w-full sm:p-6 lg:p-8 mb-10">
                 {{ $slot }}

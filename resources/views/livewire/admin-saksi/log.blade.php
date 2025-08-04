@@ -12,23 +12,23 @@
            wire:loading.class.delay="opacity-50">
         <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
         <tr>
-            <td class="px-3 py-2" width="200">Timestamp</td>
-            <td class="px-3 py-2" width="200">Nama Lengkap</td>
-            <td class="px-3 py-2">Keterangan</td>
+            <td class="px-3 py-2 text-xs" width="200">Timestamp</td>
+            <td class="px-3 py-2 text-xs" width="200">Nama Lengkap</td>
+            <td class="px-3 py-2 text-xs">Keterangan</td>
         </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
         @forelse($logs as $log)
             <tr class="text-left font-bold bg-turquoise-500 turquoise-500">
-                <td class="px-3 py-2 text-sm whitespace-pre-wrap"
+                <td class="px-3 py-2 text-xs whitespace-pre-wrap"
                     width="200">{{ $log->created_at->format('d-m-Y H:i:s') }}</td>
-                <td class="px-3 py-2 text-sm whitespace-pre-wrap"
+                <td class="px-3 py-2 text-xs whitespace-pre-wrap"
                     width="200">{{ $log->user->name ?? 'Unknown User' }} ({{$log->user->roles->pluck('name')->implode(', ')}})</td>
-                <td class="px-3 py-2 text-sm whitespace-pre-wrap">{{ $log->ip_address }}</td>
+                <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $log->ip_address }}</td>
             </tr>
         @empty
             <tr class="bg-white">
-                <td colspan="3" class="text-center py-4 text-gray-500 border">
+                <td colspan="3" class="text-center py-4 text-gray-500 border text-xs">
                     No logs found.
                 </td>
             </tr>
