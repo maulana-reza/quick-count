@@ -67,7 +67,7 @@ dark:text-gray-300 dark:focus:ring-offset-dark-eval-1 "
                         :placeholder="__($attributes['label'])"
                         :name="$attributes['name']"
                         wire:key="{{$attributes['name']}}"
-                        wire:model.change="{{$attributes['name']}}"
+                        wire:model.defer="{{$attributes['name']}}"
                         :disabled="@$attributes['disabled'] ?? false"
                         required/>
                 </div>
