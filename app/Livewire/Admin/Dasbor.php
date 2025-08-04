@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Formulir;
+use App\Models\Saksi;
 use App\Models\Tps;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
@@ -25,7 +26,9 @@ class Dasbor extends Component
             [
                 'icon' => 'heroicon-o-user',
                 'label' => 'Jumlah Saksi',
-                'value' => User::role(User::SAKSI)
+                'value' => Saksi::whereHas('user',function ($query){
+                    $query->role(User::SAKSI);
+                })
                     ->count(),
             ],
             [

@@ -34,7 +34,7 @@ class SaksiReferenceChild extends Component
         'item.foto' => 'nullable|image',
         'item.email' => 'required|unique:users,email',
         'item.password' => 'required|min:8',
-        'item.village_id' => 'nullable|exists:laravolt_indonesia_villages,id',
+        'item.village_id' => 'nullable|required',
     ];
 
     /**
@@ -86,9 +86,11 @@ class SaksiReferenceChild extends Component
 
     public function deleteItem(): void
     {
+        $this->saksi->user->delete();
         $this->saksi->delete();
         $this->confirmingItemDeletion = false;
         $this->saksi = '';
+
         $this->reset(['item']);
         $this->dispatch('refresh')->to('saksi-reference');
         $this->dispatch('show', 'Record Deleted Successfully')->to('livewire-toast');
@@ -115,7 +117,7 @@ class SaksiReferenceChild extends Component
             'email' => $this->item['email'] ?? '',
             'password' => bcrypt($this->item['password'] ?? ''),
         ]);
-        $user->assignRole(User::SAKSI);
+        $user->syncRoles(User::SAKSI);
         $item = Saksi::create([
             'user_id' => $user->id,
             'nik' => $this->item['nik'] ?? '',
@@ -137,12 +139,24 @@ class SaksiReferenceChild extends Component
         $this->resetErrorBag();
         $this->saksi = $saksi;
         $this->item = $saksi->toArray();
+        $this->item['email'] = $saksi->user->email;
+        $this->item['no_hp'] = $saksi->no_hp;
+        $this->item['city_code'] = $saksi->village ? $saksi->village->district->city_code : '';
+        $this->item['district_code'] = $saksi->village ? $saksi->village->district_code : '';
         $this->confirmingItemEdit = true;
     }
 
     public function editItem(): void
     {
-        $this->validate();
+        $this->rules['item.nik'] = 'required|unique:saksi,nik,' . $this->saksi->id . '|min:15';
+        $this->rules['item.foto'] = 'nullable';
+        $this->rules['item.email'] = 'required|unique:users,email,' . $this->saksi->user->id;
+        $this->rules['item.password'] = 'nullable|min:8';
+        $this->validate(
+            $this->rules,
+            [],
+            $this->validationAttributes
+        );
         $user = $this->saksi->user;
         if ($user->email !== $this->item['email']) {
             $this->validate([
@@ -168,10 +182,11 @@ class SaksiReferenceChild extends Component
             'tps' => $this->item['tps'] ?? '',
             'no_hp' => $this->item['no_hp'] ?? '',
         ]);
-        if (isset($this->item['foto'])) {
+        if (isset($this->item['foto']) && !is_string($this->item['foto'])) {
             $this->saksi->foto = $this->item['foto']->store('saksi-foto', 'public');
             $this->saksi->save();
         }
+        $this->saksi->user->syncRoles(User::SAKSI);
         $this->confirmingItemEdit = false;
         $this->primaryKey = '';
         $this->dispatch('refresh')->to('saksi-reference');

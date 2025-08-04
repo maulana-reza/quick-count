@@ -58,7 +58,7 @@
                                 <x-tall-crud-icon-delete/>
                             </x-button>
                             @if(auth()->user()->can('manage users'))
-                                <a href="{{ route('impersonate', ['id' => $result->id]) }}">
+                                <a href="{{ route('impersonate', ['id' => $result->user_id]) }}">
                                     <x-button variant="secondary" class="text-xs" type="submit">
                                         Login Sebagai
                                     </x-button>
