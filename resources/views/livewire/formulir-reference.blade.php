@@ -3,19 +3,17 @@
         <div class="flex justify-between">
             <div class="text-2xl">Formulir</div>
         </div>
-
         <div class="mt-6">
             <div class="flex justify-between">
                 <div class="flex">
                     <x-tall-crud-input-search/>
                 </div>
                 <div class="flex">
-
                     <x-tall-crud-page-dropdown/>
                     @livewire('formulir-reference-child')
                 </div>
             </div>
-            <table class="w-full my-4 whitespace-nowrap rounded shadow overflow-hidden"
+            <table class="w-full my-4 whitespace-nowrap rounded shadow overflow-scroll"
                    wire:loading.class.delay="opacity-50">
                 <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
                 <tr class="">

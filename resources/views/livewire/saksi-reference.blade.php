@@ -1,22 +1,22 @@
-<div>
-    <div class="bg-white rounded-lg px-4 py-4 custom-scrollbar dark:bg-dark-eval-1 grid grid-cols-1 gap-4">
+<div class="custom-scrollbar dark:bg-dark-eval-1 grid grid-cols-1 gap-4">
+    <div class="flex justify-between">
+        <div class="text-2xl">Saksi</div>
+        <x-button type="submit" wire:click="$dispatchTo('saksi-reference-child', 'showCreateForm');"
+                  class="text-blue-500">
+            <x-tall-crud-icon-add/>
+        </x-button>
+    </div>
+    <div class="">
         <div class="flex justify-between">
-            <div class="text-2xl">Saksi</div>
-            <x-button type="submit" wire:click="$dispatchTo('saksi-reference-child', 'showCreateForm');"
-                      class="text-blue-500">
-                <x-tall-crud-icon-add/>
-            </x-button>
-        </div>
-        <div class="">
-            <div class="flex justify-between">
-                <div class="flex">
-                    <x-tall-crud-input-search/>
-                </div>
-                <div class="flex">
-                    <x-tall-crud-page-dropdown/>
-                </div>
+            <div class="flex">
+                <x-tall-crud-input-search/>
+            </div>
+            <div class="flex">
+                <x-tall-crud-page-dropdown/>
             </div>
         </div>
+    </div>
+    <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-nowrap rounded shadow overflow-hidden"
                wire:loading.class.delay="opacity-50">
             <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
@@ -43,7 +43,7 @@
                         @else
                             <span class="text-gray-500">No Photo</span>
                     @endif
-                    <td class="px-3 py-2 flex gap-2 items-center"w>
+                    <td class="px-3 py-2 flex gap-2 items-center" w>
                         <x-button type="submit"
                                   variant="warning"
                                   wire:click="$dispatchTo('saksi-reference-child', 'showEditForm', { saksi: {{ $result->id}} });"
@@ -74,9 +74,9 @@
             @endforelse
             </tbody>
         </table>
-        <div class="mt-4">
-            {{ $results->links() }}
-        </div>
-        @livewire('saksi-reference-child')
     </div>
+    <div class="mt-4">
+        {{ $results->links() }}
+    </div>
+    @livewire('saksi-reference-child')
 </div>
