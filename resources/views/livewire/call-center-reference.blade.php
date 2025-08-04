@@ -1,4 +1,4 @@
-<div class="dark:bg-dark-eval-1  custom-scrollbar grid grid-cols-1 gap-4">
+<div class="custom-scrollbar grid grid-cols-1 gap-4">
     <div class="flex justify-between items-end justify-content-end">
         <div></div>
         <x-button type="submit" wire:click="$dispatchTo('call-center-reference-child', 'showCreateForm');"

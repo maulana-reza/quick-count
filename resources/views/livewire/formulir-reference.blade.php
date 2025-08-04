@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 gap-4 dark:bg-dark-eval-1 rounded-lg custom-scrollbar">
+<div class="grid grid-cols-1 gap-4 rounded-lg custom-scrollbar">
     <div class="flex justify-between">
         <div class="flex">
             <x-tall-crud-input-search/>

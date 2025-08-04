@@ -74,6 +74,28 @@
             <!-- Page Content -->
             <main class="flex-1 p-4 mx-auto max-w-8xl w-full sm:p-6 lg:p-8 mb-10">
                 {{ $slot }}
+                <div x-data="{ isOpen: false }" class="flex justify-center mt-10">
+                    <x-button variant="secondary" class="text-turquoise-500 flex" @click="isOpen = !isOpen">
+                        <div class="text-turquoise-500 rounded-full dark:bg-eval-1 bg:white mr-3">
+                            @svg('akar-phone', 'h-5 w-5')
+                        </div>
+                        Hubungi Admin
+                    </x-button>
+                    <div x-show="isOpen" class="absolute bg-white dark:bg-dark-eval-1 shadow-lg rounded-lg p-4 mt-2"
+                         @click.away="isOpen = false">
+                        <div class="grid grid-cols-1 gap-2 items">
+                            @forelse(\App\Models\CallCenter::all() as $item)
+                                <div class="text-gray-700 dark:text-gray-300">
+                                    <p class="font-semibold">Admin:</p>
+                                    <p>{{ $item->nama }}</p>
+                                    <p>No. HP: {!! \App\Helpers\Menu::chatWhatsapp($item->no_hp) !!}</p>
+                                </div>
+                            @empty
+                                <div class="text-gray-500">Tidak ada admin yang tersedia.</div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
             </main>
             <!-- Page Footer -->
             <x-footer/>
