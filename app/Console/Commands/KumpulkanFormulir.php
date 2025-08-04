@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Constants\Form;
 use App\Models\DataFormulir;
 use App\Models\FormUkt;
+use App\Models\Formulir;
 use App\Models\Log;
 use App\Models\Paslon;
 use App\Models\Periode;
@@ -72,8 +73,10 @@ class KumpulkanFormulir extends Command
         foreach ($paslon as $p) {
             foreach ($village as $item) {
                 $data[$p->no_urut][$item->code] = DataFormulir::where('paslon_id', $p->id)
-                    ->whereHas('formulir.village', function ($query) use ($item) {
-                        $query->where('district_code', $item->code);
+                    ->whereHas('formulir', function ($query) use ($item) {
+                        $query->whereHas('village', function ($query) use ($item) {
+                            $query->where('district_code', $item->code);
+                        })->where('status_form', Formulir::SUDAH_VALID);
                     })
                     ->sum('suara');
             }
