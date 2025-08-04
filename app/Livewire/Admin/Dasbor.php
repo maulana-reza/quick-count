@@ -29,18 +29,21 @@ class Dasbor extends Component
                 'value' => Saksi::whereHas('user',function ($query){
                     $query->role(User::SAKSI);
                 })
+                    ->get()
                     ->count(),
             ],
             [
                 'icon' => 'heroicon-o-user',
                 'label' => 'Jumlah Admin Saksi',
                 'value' => User::role(User::ADMIN_SAKSI)
+                    ->get()
                     ->count(),
             ],
             [
                 'icon' => 'heroicon-o-user',
                 'label' => 'Jumlah Koordinator Saksi',
                 'value' => User::role(User::KOORDINATOR_SAKSI)
+                    ->get()
                     ->count(),
             ],
         ];
