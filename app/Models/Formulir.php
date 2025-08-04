@@ -21,6 +21,39 @@ class Formulir extends Model
         'tps_id',
         'suara_tidak_sah',
     ];
+    protected static function booted()
+    {
+        static::created(function ($model) {
+            if ($model->foto_kejadian) {
+                $words = 'Formulir dengan ID %S telah dibuat oleh %s, status formulir : %s, laporan kejadian : %s';
+                $words .= ', dengan keterangan : %s';
+                $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form, $model->laporan_kejadian, $model->foto_kejadian);
+            }else{
+                $words = 'Formulir dengan ID %S telah dibuat oleh %s, status formulir : %s';
+            }
+            Log::create([
+                'aksi' => 'Menambahkan formulir',
+                'keterangan' => sprintf($words, $model->id, auth()->user()->name, $model->status_form),
+                'user_id' => auth()->id(),
+            ]);
+        });
+
+        static::updated(function ($model) {
+            if (auth()->user()->hasRole(User::KOORDINATOR_SAKSI)){
+                $words = 'Formulir dengan ID %S telah diperbarui oleh %s, status formulir : %s, laporan kejadian : %s';
+                $words .= ', dengan keterangan : %s';
+                $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form, $model->laporan_kejadian, $model->foto_kejadian);
+            }else{
+                $words = 'Formulir dengan ID %S telah diperbarui oleh %s, status formulir : %s';
+                $words = sprintf($words, $model->id, auth()->user()->name, $model->status_form);
+            }
+            Log::create([
+                'user_id' => auth()->id(),
+                'aksi' => 'Memperbarui formulir',
+                'keterangan' => $words,
+            ]);
+        });
+    }
 
     public function saksi()
     {

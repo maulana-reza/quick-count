@@ -15,4 +15,13 @@ class Paslon extends Model
         'foto_kepala',
         'foto_wakil',
     ];
+    public function getNameAttribute()
+    {
+        return 'No. Urut ' . $this->no_urut . ' - ' . $this->kepala . ' dan ' . $this->wakil;
+    }
+    public function getImageAssetAttribute()
+    {
+        return asset('storage/' . $this->foto_kepala);
+
+    }
 }

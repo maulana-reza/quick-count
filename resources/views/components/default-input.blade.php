@@ -62,7 +62,7 @@ dark:text-gray-300 dark:focus:ring-offset-dark-eval-1 "
                     <x-input
                         accept="{{$attributes['accept'] ?: 'image/*,application/pdf'}}"
                         style="padding-top: 0px;padding-bottom: 0px;"
-                        class=" mt-1 block file:text-xs file:font-medium file:border-0 file:py-3 file:bg-turquoise-300 file:text-turquoise-700 file:my-0 py-0 hover:file:cursor-pointer hover:file:bg-turquoise-50 hover:file:text-turquoise-700 w-full text-sm text-turquoise-900 border border-turquoise-300 rounded-lg cursor-pointer bg-turquoise-50 dark:text-turquoise-400 focus:outline-none dark:bg-turquoise-700 dark:border-turquoise-600 dark:placeholder-turquoise-400"
+                        class=" mt-1 block file:text-xs file:font-medium file:border-0 file:py-3 file:bg-turquoise-300 file:text-turquoise-700 file:my-0 py-0 hover:file:cursor-pointer hover:file:bg-turquoise-50 hover:file:text-turquoise-700 w-full text-sm text-turquoise-900 border border-turquoise-300 rounded-lg cursor-pointer bg-white dark:text-turquoise-400  focus:outline-none dark:bg-turquoise-700 dark:border-turquoise-600 dark:placeholder-turquoise-400"
                         type="{{$attributes['type'] ?: 'text'}}"
                         :placeholder="__($attributes['label'])"
                         :name="$attributes['name']"
