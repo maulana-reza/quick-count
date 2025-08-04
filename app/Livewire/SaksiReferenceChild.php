@@ -27,7 +27,7 @@ class SaksiReferenceChild extends Component
      * @var array
      */
     protected $rules = [
-        'item.nik' => 'required|unique:saksis,nik|min:15',
+        'item.nik' => 'required|unique:saksi,nik|min:15',
         'item.nama' => 'required|min:3',
         'item.tps' => 'required|numeric',
         'item.no_hp' => 'required|numeric|min:10',
