@@ -78,7 +78,7 @@ class KumpulkanFormulir extends Command
                             $query->where('district_code', $item->code);
                         })->where('status_form', Formulir::SUDAH_VALID);
                     })
-                    ->sum('suara');
+                    ->sum('value');
             }
         }
         foreach ($village as $villageItem) {
