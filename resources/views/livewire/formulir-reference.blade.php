@@ -28,18 +28,20 @@
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->saksi->nama }}</td>
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ \App\Models\Formulir::path($result->village_id) }}</td>
                     <td class="px-3 py-2 text-xs">@if($result->foto)<a href="#"
-                                                                                           onclick="window.open('{{ asset('storage/' . $result->foto) }}', 'popup', 'width=800,height=600,scrollbars=yes,resizable=yes'); return false;"
-                                                                                           class="text-blue-500 hover:underline">Lihat Foto
+                                                                       onclick="window.open('{{ asset('storage/' . $result->foto) }}', 'popup', 'width=800,height=600,scrollbars=yes,resizable=yes'); return false;"
+                                                                       class="text-blue-500 hover:underline">Lihat Foto
                         </a>
                         @else Tidak ada foto @endif
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->status_form }}</td>
                     <td class="px-3 py-2 text-xs">
                         <div class="flex gap-2 items-center justify-content-center justify-items-center text-xs">
-                            <x-button variant="success" class="text-green-500 text-xs flex gap-2">
+                            <x-button variant="success" class="text-green-500 text-xs flex gap-2"
+                                      wire:click="validateForm({{ $result->id }})">
                                 <x-icon name="heroicon-o-check" class="h-4 w-4"/>
                                 VALID
                             </x-button>
-                            <x-button variant="danger" class="text-red-500 text-xs flex gap-2">
+                            <x-button variant="danger" class="text-red-500 text-xs flex gap-2"
+                                      wire:click="invalidateForm({{ $result->id }})">
                                 <x-tall-crud-icon-delete/>
                                 TIDAK VALID
                             </x-button>
@@ -55,6 +57,32 @@
             @endforelse
             </tbody>
         </table>
+        <x-tall-crud-confirmation-dialog wire:model="confirm">
+            <x-slot name="title">Konfirmasi</x-slot>
+            <x-slot name="content">
+                @if($confirm == 1)
+                    <div class="text-sm text-gray-700">
+                        Apakah Anda yakin ingin menandai formulir ini sebagai valid?
+                    </div>
+                @elseif($confirm == 2)
+                    <div class="text-sm text-gray-700">
+                        Apakah Anda yakin ingin menandai formulir ini sebagai tidak valid?
+                    </div>
+                @endif
+            </x-slot>
+            <x-slot name="footer">
+                <x-tall-crud-button variant="secondary" wire:click="$set('confirm', false)">
+                    Batal
+                </x-tall-crud-button>
+                <x-tall-crud-button variant="success" wire:click="confirmFormulir">
+                    @if($confirm == 1)
+                        Ya, Tandai Valid
+                    @elseif($confirm == 2)
+                        Ya, Tandai Tidak Valid
+                    @endif
+                </x-tall-crud-button>
+            </x-slot>
+        </x-tall-crud-confirmation-dialog>
     </div>
     <div>
         {{ $results->links() }}
