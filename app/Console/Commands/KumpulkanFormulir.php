@@ -75,7 +75,7 @@ class KumpulkanFormulir extends Command
                     ->whereHas('formulir.village', function ($query) use ($item) {
                         $query->where('district_code', $item->code);
                     })
-                    ->count();
+                    ->sum('suara');
             }
         }
         foreach ($village as $villageItem) {
