@@ -15,6 +15,7 @@
             <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
             <tr>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">Provinsi - Kab/Kota - Kecamatan/Distrik - Kel/Desa</td>
+                <td class="px-3 py-2 text-xs whitespace-pre-wrap max-w-30 text-center" width="100">Jml. Saksi</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap max-w-30 text-center" width="100">Jml. Suara Sah</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap max-w-30 text-center" width="100">Jml. Suara Tidak Sah</td>
                 {{--            <td class="px-3 py-2" width="200">Aksi</td>--}}
@@ -43,6 +44,7 @@
                             ($district[$tp->district_code]['suara_sah'] ?? 0) . ' / ' .
                             ($district[$tp->district_code]['suara_tidak_sah'] ?? 0) . ') - ' .
                             $tp->name !!}</td>
+                    <td class="px-3 py-2 text-xs whitespace-pre-wrap text-center font-bold">{{ \App\Models\Saksi::where('village_id',$tp->id)->get()->count() ?? 0 }}</td>
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap text-center font-bold">{{ $suara['suara_sah'] ?? 0 }}</td>
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap text-center font-bold">{{ $suara['suara_tidak_sah'] ?? 0 }}</td>
                     {{--                <td class="px-3 py-2 text-xs whitespace-pre-wrap">--}}

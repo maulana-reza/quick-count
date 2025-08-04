@@ -9,11 +9,13 @@
         </div>
     </div>
     <div class="overflow-x-auto w-full">
-        <table class="w-full my-4 whitespace-nowrap rounded shadow overflow-scroll"
+        <table class="w-full my-4 whitespace-nowrap rounded shadow overflow-hidden"
                wire:loading.class.delay="opacity-50">
             <thead class="bg-turquoise-500 dark:text-white text-white font-bold">
             <tr class="">
+                <td class="px-3 py-2 text-xs whitespace-pre-wrap">#</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">Nama Saksi</td>
+                <td class="px-3 py-2 text-xs whitespace-pre-wrap">Lokasi</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">Foto Formulir C1</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">Status Form</td>
                 <td class="px-3 py-2 text-xs whitespace-pre-wrap">Actions</td>
@@ -21,19 +23,25 @@
             </thead>
             <tbody class="divide-y divide-">
             @forelse($results as $result)
-                <tr class="text-left bg-turquoise-500 turquoise-500">
+                <tr class="text-left {{ $loop->even ? 'bg-gray-100 dark:bg-dark-eval-2' : 'bg-white dark:bg-dark-eval-0' }}">
+                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $loop->iteration+1 }}</td>
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->saksi->nama }}</td>
-                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">@if($result->foto_formulir)<a
-                            href="{{ asset('storage/' . $result->foto_formulir) }}" target="_blank"
-                            class="text-blue-500 hover:underline">Lihat Foto</a>@else Tidak ada foto @endif
+                    <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ \App\Models\Formulir::path($result->village_id) }}</td>
+                    <td class="px-3 py-2 text-xs">@if($result->foto)<a href="#"
+                                                                                           onclick="window.open('{{ asset('storage/' . $result->foto) }}', 'popup', 'width=800,height=600,scrollbars=yes,resizable=yes'); return false;"
+                                                                                           class="text-blue-500 hover:underline">Lihat Foto
+                        </a>
+                        @else Tidak ada foto @endif
                     <td class="px-3 py-2 text-xs whitespace-pre-wrap">{{ $result->status_form }}</td>
                     <td class="px-3 py-2 text-xs">
                         <div class="flex gap-2 items-center justify-content-center justify-items-center text-xs">
-
-                            <x-button variant="danger" type="submit"
-                                      wire:click="$dispatchTo('formulir-reference-child', 'showDeleteForm', { formulir: {{ $result->id}} });"
-                                      class="text-red-500">
+                            <x-button variant="success" class="text-green-500 text-xs flex gap-2">
+                                <x-icon name="heroicon-o-check" class="h-4 w-4"/>
+                                VALID
+                            </x-button>
+                            <x-button variant="danger" class="text-red-500 text-xs flex gap-2">
                                 <x-tall-crud-icon-delete/>
+                                TIDAK VALID
                             </x-button>
                         </div>
                     </td>
