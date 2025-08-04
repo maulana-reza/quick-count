@@ -27,11 +27,11 @@ class SaksiReferenceChild extends Component
      * @var array
      */
     protected $rules = [
-        'item.nik' => '',
-        'item.nama' => '',
-        'item.tps' => '',
-        'item.no_hp' => '',
-        'item.foto' => '',
+        'item.nik' => 'required|unique:saksis,nik|min:15',
+        'item.nama' => 'required|min:3',
+        'item.tps' => 'required|numeric',
+        'item.no_hp' => 'required|numeric|min:10',
+        'item.foto' => 'nullable|image',
         'item.email' => 'required|unique:users,email',
         'item.password' => 'required|min:8',
     ];
@@ -150,7 +150,6 @@ class SaksiReferenceChild extends Component
                 $user->password = bcrypt($this->item['password']);
             }
             $this->save();
-
         }
         $this->saksi->user->update([
             'name' => $this->item['nama'] ?? '',
