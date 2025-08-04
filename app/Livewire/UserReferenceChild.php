@@ -26,7 +26,7 @@ class UserReferenceChild extends Component
      */
     protected $rules = [
         'item.name' => 'required',
-        'item.email' => 'required',
+        'item.email' => 'required|email|unique:users,email',
         'item.no_hp' => 'required',
         'item.password' => 'required',
     ];

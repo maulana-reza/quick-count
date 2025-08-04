@@ -1,3 +1,5 @@
 <div>
-    {{-- Success is as dangerous as failure. --}}
+    <x-default-input type="select"
+                     label=""
+         :option="\App\Models\Periode::getOption()"/>
 </div>
