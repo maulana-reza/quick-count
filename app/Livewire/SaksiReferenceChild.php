@@ -34,6 +34,7 @@ class SaksiReferenceChild extends Component
         'item.foto' => 'nullable|image',
         'item.email' => 'required|unique:users,email',
         'item.password' => 'required|min:8',
+        'item.village_id' => 'nullable|exists:laravolt_indonesia_villages,id',
     ];
 
     /**
@@ -47,6 +48,7 @@ class SaksiReferenceChild extends Component
         'item.foto' => 'Foto',
         'item.email' => 'Username',
         'item.password' => 'Password',
+        'item.village_id' => 'Desa',
     ];
 
     /**
