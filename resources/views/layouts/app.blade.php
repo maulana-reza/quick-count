@@ -74,7 +74,7 @@
             <!-- Page Content -->
             <main class="flex-1 p-4 mx-auto max-w-8xl w-full sm:p-6 lg:p-8 mb-10">
                 {{ $slot }}
-                <div x-data="{ isOpen: false }" class="flex justify-center mt-10">
+                <div x-data="{ isOpen: false }" class="flex justify-center mb-10">
                     <x-button variant="secondary" class="text-turquoise-500 flex" @click="isOpen = !isOpen">
                         <div class="text-turquoise-500 rounded-full dark:bg-eval-1 bg:white mr-3">
                             @svg('akar-phone', 'h-5 w-5')
@@ -96,6 +96,7 @@
                         </div>
                     </div>
                 </div>
+
             </main>
             <!-- Page Footer -->
             <x-footer/>
